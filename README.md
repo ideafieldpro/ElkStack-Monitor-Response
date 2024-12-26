@@ -28,17 +28,19 @@ This project demonstrates my practical experience with essential SOC analyst too
 
 This project showcases my ability to set up, configure, and maintain essential SOC analyst tools while implementing security monitoring best practices in a simulated environment.
 
+---
+
 # Steps
 
 ## 1. Using Draw.io for Diagram Creation
 
-- **Getting Started**:
-    - Visit [draw.io](https://draw.io/) to create visual diagrams easily.
-    - Rename the default diagram from "Untitled Diagram" to "30-Day Defer Diagram".
+**Getting Started**:
+- Visit [draw.io](https://draw.io/) to create visual diagrams easily.
+- Rename the default diagram from "Untitled Diagram" to something more descriptive and memorable.
 
 ### Building the Infrastructure
 
-1. **Creating Servers**:
+- **Creating Servers**:
     - Search for "server" icons and create six servers using the Vulture cloud provider.
     - Types of servers included:
         - Elastic and Kibana servers
@@ -47,21 +49,21 @@ This project showcases my ability to set up, configure, and maintain essential S
         - Fleet server
         - OS Ticket server
         - Command and Control (C2) server
-2. **Diagram Structure**:
+- **Diagram Structure**:
     - Use rounded rectangles to represent cloud providers and label them appropriately (e.g., Vulture).
     - Color coding is used for visual clarity (e.g., red for the C2 server).
-3. **Linking Servers**:
+- **Linking Servers**:
     - Connect servers using arrows to show communication paths.
     - Use directional arrows to indicate data flow between servers.
-4. **Private Network Setup**:
+- **Private Network Setup**:
     - Specify a private network range (e.g., 172.31.0.0/24) for virtual machines within the VPC.
-5. **Adding Internet Gateway**:
+- **Adding Internet Gateway**:
     - Include an internet gateway and connect it to the VPC and external internet.
-6. **SOC Analyst Laptop**:
+- **SOC Analyst Laptop**:
     - Introduce a "SOC Analyst Laptop" and an "Attacker Laptop" representing different roles in the environment.
     - Connect these laptops to the internet and relevant servers.
 
-## Finalizing the Diagram
+### Finalizing the Diagram
 
 - Save your work in Draw.io to keep a record of the diagram.
   ![Test Environment](https://github.com/user-attachments/assets/df783eda-f2e8-42bf-94c8-c0706d77045e)
@@ -70,8 +72,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ## 2. Elastic Setup
 
-### 1. **Creating a Virtual Private Cloud (VPC)**
-
+### **Creating a Virtual Private Cloud (VPC)**
 - **Platform:** Vultr.com
 - **Sign Up:** Users can sign up and utilize a $300 credit if they are following these steps.
 - **VPC Setup:**
@@ -80,8 +81,7 @@ This project showcases my ability to set up, configure, and maintain essential S
     - Create a new VPC ensuring that the location matches the virtual machines to be created (e.g., Toronto).
     - Configure the IP range (e.g., `172.31.0.0/24`) and name it "ideafieldpro analyst".
 
-### 2. **Deploying a Virtual Machine**
-
+### **Deploying a Virtual Machine**
 - **Deployment:**
     - Click "Deploy" and select a new server.
     - Use Ubuntu with specified resources (e.g., 4 virtual CPUs, 16 GB RAM).
@@ -90,7 +90,7 @@ This project showcases my ability to set up, configure, and maintain essential S
     - Ensure that the virtual machine is in the correct VPC.
       ![brave_Evy4ZGcMot](https://github.com/user-attachments/assets/7a5b1498-0138-4e17-85f6-8e75d2191342)
 
-### 3. **SSH Access to the Virtual Machine**
+### **SSH Access to the Virtual Machine**
 
 - Use PowerShell to SSH into the VM using the provided username and public IP address.
   ![WindowsTerminal_NA8i3xTdp5](https://github.com/user-attachments/assets/cd70bf79-252f-428c-b60c-a8cc53a9f532)
@@ -102,7 +102,7 @@ This project showcases my ability to set up, configure, and maintain essential S
     
     ```
     
-### 4. **Installing Elasticsearch**
+### **Installing Elasticsearch**
 
 - **Download Installation:**
     - Find the appropriate Elasticsearch package and download it using `wget`.
@@ -117,13 +117,13 @@ This project showcases my ability to set up, configure, and maintain essential S
     - Save the security auto-configuration information containing the built-in superuser's password.
     - **This step is very important!**
 
-### 5. **Configuring Elasticsearch**
+### **Configuring Elasticsearch**
 
 - Edit the configuration file located at `/etc/elasticsearch/elasticsearch.yml`:
     - Change `network.host` to allow access from the SOC analyst laptop.
 - Ensure to set HTTP ports correctly for access.
 
-### 6. **Starting Elasticsearch Service**
+### **Starting Elasticsearch Service**
 
 - Start and enable the service using:
     
@@ -142,11 +142,11 @@ This project showcases my ability to set up, configure, and maintain essential S
     ```
 ---
 
-## 4. Kibana Setup
+## 3. Kibana Setup
 
 ### Installation Steps
 
-1. **Download Kibana**:
+- **Download Kibana**:
     - Go to [elastic.co](https://www.elastic.co/downloads).
     - Select the appropriate version for your system (e.g., Debian x86_64).
     - Copy the download link and use an SSH session to download Kibana with the command:
@@ -156,7 +156,7 @@ This project showcases my ability to set up, configure, and maintain essential S
         
         ```
         
-2. **Install Kibana**:
+- **Install Kibana**:
     - After downloading, use the following command to install Kibana:
         
         ```bash
@@ -166,7 +166,7 @@ This project showcases my ability to set up, configure, and maintain essential S
       ![WindowsTerminal_O61V8GFKKm](https://github.com/user-attachments/assets/e64089d3-63c0-4414-92d9-0f7fc4f3962d)
 
         
-3. **Configuration Changes**:
+- **Configuration Changes**:
     - Open the configuration file located at `/etc/kibana/kibana.yml` using:
         
         ```bash
@@ -179,7 +179,7 @@ This project showcases my ability to set up, configure, and maintain essential S
     - Save and exit the editor.
       ![WindowsTerminal_ko01MKj5CX](https://github.com/user-attachments/assets/731d352c-7578-4395-8e31-beab58d38e09)
 
-4. **Start Kibana Service**:
+- **Start Kibana Service**:
     - Reload the system daemon and start Kibana using:
         
         ```bash
@@ -189,7 +189,7 @@ This project showcases my ability to set up, configure, and maintain essential S
         
         ```
         
-5. **Check Kibana Status**:
+- **Check Kibana Status**:
     - Verify that Kibana is running with:
         
         ```bash
@@ -210,9 +210,9 @@ This project showcases my ability to set up, configure, and maintain essential S
     
 - Copy the generated token for later use.
 
-## Firewall Configuration
+### Firewall Configuration
 
-1. **Adjust Firewall Rules**:
+- **Adjust Firewall Rules**:
     - Ensure that the firewall allows access to port 5601 (Kibana's default port).
     - Use the following command to allow incoming connections:
         
@@ -223,7 +223,7 @@ This project showcases my ability to set up, configure, and maintain essential S
         ![WindowsTerminal_NGjMrhO3Xh](https://github.com/user-attachments/assets/31f3bbd1-89c1-4979-93b8-8a5d0c787f87)
         
         
-2. **Vultr Firewall Settings**:
+- **Vultr Firewall Settings**:
     - In your Vultr instance, configure firewall rules to allow TCP traffic on ports 1-65535 for your public IP address.
       ![brave_gPZx8QGMhc](https://github.com/user-attachments/assets/8717be63-7ef9-4932-a513-1282982d3c66)
 
@@ -233,7 +233,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 - Access Kibana through a web browser using your public IP and port 5601.
 - Use the enrollment token to configure Elasticsearch.
 
-## Adding Encryption Keys
+### Adding Encryption Keys
 
 - Generate and add encryption keys in Kibana for saved objects and security settings.
   ![WindowsTerminal_SiLNCDmJTk](https://github.com/user-attachments/assets/8f8b7e58-c188-4913-924e-d3445fbf79d4)
@@ -249,62 +249,67 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ---
 
-## 5. Windows Server 2022 Installation
+## 4. Windows Server 2022 Installation
 
 ### Steps to Deploy Windows Server
 
-1. **Accessing the Cloud Provider**:
+- **Accessing the Cloud Provider**:
     - Navigate to the Vultr platform.
     - Log in to your account.
-2. **Deploying a New Server**:
+  
+- **Deploying a New Server**:
     - Select "Deploy" and then "Deploy New Server."
     - Choose "Cloud Compute" with shared CPU, as a high-performance server isn't necessary for this task.
     - Set the server location to "Toronto" (the same region as before) and select the latest Windows Server 2022 image.
     - Opt for the $24/month plan, which has 1 vCPU and 2 GB of memory to save money/credits.
-3. **Network Configuration**:
+
+- **Network Configuration**:
     - It is important to keep the Windows Server isolated from the broader network to prevent unauthorized access.
     - Instead of using a Virtual Private Cloud (VPC), the server will be set up without it to allow public access.
-4. **Server Naming Convention**:
+
+- **Server Naming Convention**:
     - Follow a specific naming convention for the server.
     - For instance, if your username is ideafieldpro, name your server `socanalyst-win2022-ideafieldpro`.
-5. **Deployment Process**:
+
+- **Deployment Process**:
     - After naming the server, click "Deploy".
     - Wait for the server status to change to "Running".
     - Access the console to log in by sending a Control-Alt-Delete command and entering the password copied from the dashboard.
-6. **RDP Connection**:
+
+- **RDP Connection**:
     - Copy the public IP address and open Remote Desktop.
     - Paste the IP and connect successfully to the Windows Server.
 
 ---
 
-## 7. Elastic Agent and Fleet Server Setup 
+## 5. Elastic Agent and Fleet Server Setup 
 
 ### Setup Process
 
-1. **Creating the Fleet Server**:
+- **Creating the Fleet Server**:
     - A new server is deployed in "Toronto" (the same location as before) using Ubuntu 22.04 with 4 GB of RAM.
     - The server is set up without auto-backups and IPv6.
     - The public IP address for the Fleet server is noted.
       ![brave_pxf58YQwKC](https://github.com/user-attachments/assets/4269792a-3425-4075-81c9-b0780603288b)
 
-2. **Web GUI Access**:
+- **Web GUI Access**:
     - Access the Elastic web GUI at `http://<public_IP>:5601`.
     - Navigate to Fleet management and select "Add Fleet Server."
     - Opt for the "Quick Start" setup.
       ![brave_lEXaSjB85z](https://github.com/user-attachments/assets/ee473e92-6b1b-4dc6-a4ff-b732d25fe0aa)
 
-3. **Fleet Server Policy Creation**:
+- **Fleet Server Policy Creation**:
     - Enter the public IP of the virtual machine and ensure it uses `https://` protocol.
       ![brave_NV6EWPGanM](https://github.com/user-attachments/assets/fd05f439-40e9-4bf4-973d-af62c96dfe14)
 
     - Generate the Fleet server policy and copy the provided token for installation.
       ![brave_8LPjvE04if](https://github.com/user-attachments/assets/0edefe7e-48e8-4bd5-b9fd-2dfe8568af83)
 
-4. **SSH into Fleet Server**:
+- **SSH into Fleet Server**:
     - Use PowerShell to SSH into the Fleet server using the root account.
     - Update repository lists and install the Elastic Agent by pasting the policy.
       
-5. **Firewall Configuration**:
+- **Firewall Configuration**:
     - Adjust firewall rules to allow communication between the Fleet server and Elasticsearch (which listens on port 9200).
     - Use `ufw` to allow incoming connections on necessary ports.'
       
@@ -328,94 +333,82 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ---
 
-## 8. Sysmon Setup
+## 6. Sysmon Setup
 
 ### Step-by-Step Process
 
-1. Preparation
+- Preparation
+    - The server's public IP address and password is used for remote desktop connection.
 
-- The server's public IP address and password is used for remote desktop connection.
+- Connecting to the Server
+    - Use Remote Desktop Protocol (RDP) to connect to the Windows Server.
+    - Enter the administrator credentials to access the server.
 
-2. Connecting to the Server
+- Downloading Sysmon
+    - Open a web browser and search for Sysmon.
+    - Download Sysmon version 15.15 from Microsoft's website.
+    - It's advised to scroll down the page to understand various event IDs for later investigations.
 
-- Use Remote Desktop Protocol (RDP) to connect to the Windows Server.
-- Enter the administrator credentials to access the server.
-
-3. Downloading Sysmon
-
-- Open a web browser and search for Sysmon.
-- Download Sysmon version 15.15 from Microsoft's website.
-- It's advised to scroll down the page to understand various event IDs for later investigations.
-
-4. Extracting Files
+- Extracting Files
 
 - After downloading, extract the Sysmon files from the zip folder.
 
-5. Downloading Configuration File
+- Downloading Configuration File
+    - Search for Olaf’s Sysmon Configuration file on GitHub.
+    - Save the configuration file `sysmonconfig.xml` in the Sysmon directory.
 
-- Search for Olaf’s Sysmon Configuration file on GitHub.
-- Save the configuration file `sysmonconfig.xml` in the Sysmon directory.
+- Using PowerShell
+    - Open PowerShell with administrative privileges.
+    - Change the directory to where Sysmon is located.
+    - Confirm you are in the correct directory by typing `dir`.
 
-6. Using PowerShell
+- Installing Sysmon
+    - Use the command line to install Sysmon:
+        
+        ```bash
+        sysmon64.exe -accepteula -i sysmonconfig.xml
+        
+        ```
+        
+    - This command installs Sysmon as a service and begins capturing logs.
 
-- Open PowerShell with administrative privileges.
-- Change the directory to where Sysmon is located.
-- Confirm you are in the correct directory by typing `dir`.
-
-7. Installing Sysmon
-
-- Use the command line to install Sysmon:
-    
-    ```bash
-    sysmon64.exe -accepteula -i sysmonconfig.xml
-    
-    ```
-    
-- This command installs Sysmon as a service and begins capturing logs.
-
-8. Verifying Installation
-
-- Open Windows Event Viewer to confirm that Sysmon is running.
-- Navigate through the Event Viewer to check for Sysmon events under "Microsoft" > "Windows" > "Sysmon" > "Operational".
-  ![mstsc_Npsf48wRgC](https://github.com/user-attachments/assets/c2a753bb-e8c9-4b16-8e0b-90c6b39f6757)
+- Verifying Installation
+    - Open Windows Event Viewer to confirm that Sysmon is running.
+    - Navigate through the Event Viewer to check for Sysmon events under "Microsoft" > "Windows" > "Sysmon" > "Operational".
+      ![mstsc_Npsf48wRgC](https://github.com/user-attachments/assets/c2a753bb-e8c9-4b16-8e0b-90c6b39f6757)
 
 
 ---
 
-## 9. Elasticsearch Ingest Data 
+## 7. Elasticsearch Ingest Data 
 
 ### Steps to Ingest Logs
 
-1. Logging into Elasticsearch
+- Logging into Elasticsearch
+    - Start by logging into your Elasticsearch instance.
+    - Select the blue "Add Integrations" button on the homepage.
 
-- Start by logging into your Elasticsearch instance.
-- Select the blue "Add Integrations" button on the homepage.
-
-2. Installing Sysmon Integration
-
-- Search for "Windows Event" and choose the "Custom Windows Event Log" package.
-- This package allows the ingestion of events from the Windows Event log channel.
+- Installing Sysmon Integration
+    - Search for "Windows Event" and choose the "Custom Windows Event Log" package.
+    - This package allows the ingestion of events from the Windows Event log channel.
 
 ### Field Mapping
 
 - The video discusses the field mappings provided in this package, which includes details like `wind log.computer name`.
 
-3. Configuring Sysmon Logs
+- Configuring Sysmon Logs
+    - Open Event Viewer on your Windows Server and navigate to `Applications and Services Logs > Microsoft > Windows > Sysmon`.
+    - Right-click on "Operational" to view its properties and copy the full channel name for integration.
 
-- Open Event Viewer on your Windows Server and navigate to `Applications and Services Logs > Microsoft > Windows > Sysmon`.
-- Right-click on "Operational" to view its properties and copy the full channel name for integration.
-
-4. Adding Sysmon Integration
-
-- In Elasticsearch, add the integration with a custom name (e.g., `DFIR-win-Sysmon`) and paste the copied channel name.
-- Save and deploy changes to complete the Sysmon integration.
+- Adding Sysmon Integration
+    - In Elasticsearch, add the integration with a custom name (e.g., `DFIR-win-Sysmon`) and paste the copied channel name.
+    - Save and deploy changes to complete the Sysmon integration.
 
 ### Installing Microsoft Defender Integration
 
-1. Setting Up Defender Logs
-
-- Expand the "Windows Defender" logs in Event Viewer and choose "Operational."
-- The video suggests filtering event IDs to include only those relevant for monitoring (e.g., `1116`, `1117`, and `50001`).
+- Setting Up Defender Logs
+    - Expand the "Windows Defender" logs in Event Viewer and choose "Operational."
+    - The video suggests filtering event IDs to include only those relevant for monitoring (e.g., `1116`, `1117`, and `50001`).
 
 ### Important Event IDs
 
@@ -423,34 +416,24 @@ This project showcases my ability to set up, configure, and maintain essential S
 - Event ID `1117`: Shows actions taken to protect the system from detected malware.
 - Event ID `50001`: Indicates when real-time protection is disabled.
 
-2. Adding Microsoft Defender Integration
-
-- Similar to Sysmon, add a new integration for Microsoft Defender with a custom name (e.g., `DFIR-win-Defender`).
-- Specify the relevant channel names and event IDs to include or exclude as needed.
+- Adding Microsoft Defender Integration
+    - Similar to Sysmon, add a new integration for Microsoft Defender with a custom name (e.g., `DFIR-win-Defender`).
+    - Specify the relevant channel names and event IDs to include or exclude as needed.
 
 ### Testing & Troubleshooting
 
-1. Verifying Ingested Logs
+- Verifying Ingested Logs
+    - Use the Discover feature in Elasticsearch to check if any Sysmon or Defender logs are showing up.
+    - If no data appears, troubleshooting steps include checking agent status and ensuring firewall rules allow connections to port 9200.
 
-- Use the Discover feature in Elasticsearch to check if any Sysmon or Defender logs are showing up.
-- If no data appears, troubleshooting steps include checking agent status and ensuring firewall rules allow connections to port 9200.
+- Firewall Configuration
+    - Ensure that your firewall permits incoming connections on port `9200` for Elasticsearch.
 
-2. Firewall Configuration
-
-- Ensure that your firewall permits incoming connections on port `9200` for Elasticsearch.
-
-### 3. Restarting Services
+### Restarting Services
 
 - Restart the Elastic Agent service if logs do not appear after configuration.
 
-## Conclusion
 
-- After troubleshooting, the video confirms that Sysmon and Microsoft Defender logs are successfully ingested into the Elasticsearch instance.
-- Viewers are encouraged to explore these logs further and check the documentation for deeper insights.
-
-## Next Steps
-
-- The next video will cover common attacks seen in various environments and tools used to conduct these attacks.
 - 11 - What is a Brute Force Attack?
 
 # Summary of "Day 11: Brute Force Attacks" - 30-Day Defend for SOC Analyst Challenge
