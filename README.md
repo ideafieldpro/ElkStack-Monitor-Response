@@ -1,10 +1,10 @@
-# ELK Stack, Security Monitoring, and Incident Response Project
+# ELK Stack, Security Monitoring, and Incident Response
 
 A comprehensive hands-on training project focused on developing practical Security Operations Center (SOC) analyst skills through real-world scenarios and industry-standard tools.
 
 ## Project Overview
 
-This project demonstrates my practical experience with essential SOC analyst tools and methodologies, including:
+This project demonstrates practical experience with essential SOC analyst tools and methodologies, including:
 
 - Deploying and managing cloud-based security infrastructure on leading platforms
 - Setting up and managing the ELK (Elasticsearch, Logstash, Kibana) Stack for log aggregation and analysis
@@ -140,6 +140,7 @@ This project showcases my ability to set up, configure, and maintain essential S
     systemctl status elasticsearch.service
     
     ```
+
 ---
 
 ## 3. Kibana Setup
@@ -394,31 +395,32 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ### Field Mapping
 
-- The video discusses the field mappings provided in this package, which includes details like `wind log.computer name`.
+- The project discusses the field mappings provided in this package, which includes details like `winlog.computer_name`.
 
 - Configuring Sysmon Logs
     - Open Event Viewer on your Windows Server and navigate to `Applications and Services Logs > Microsoft > Windows > Sysmon`.
     - Right-click on "Operational" to view its properties and copy the full channel name for integration.
 
 - Adding Sysmon Integration
-    - In Elasticsearch, add the integration with a custom name (e.g., `DFIR-win-Sysmon`) and paste the copied channel name.
+    - In Elasticsearch, add the integration with a custom name (e.g., `ideafieldpro-win-Sysmon`) and paste the copied channel name.
     - Save and deploy changes to complete the Sysmon integration.
 
 ### Installing Microsoft Defender Integration
 
 - Setting Up Defender Logs
     - Expand the "Windows Defender" logs in Event Viewer and choose "Operational."
-    - The video suggests filtering event IDs to include only those relevant for monitoring (e.g., `1116`, `1117`, and `50001`).
+    - Filter event IDs to include only those relevant for monitoring (e.g., `1116`, `1117`, and `5004`).
 
 ### Important Event IDs
 
-- Event ID `1116`: Indicates detection of potentially unwanted software.
+- Event ID `1116`: Indicates actions taken on potentially unwanted software.
 - Event ID `1117`: Shows actions taken to protect the system from detected malware.
-- Event ID `50001`: Indicates when real-time protection is disabled.
+- Event ID `5004`: Indicates when real-time protection is disabled.
 
 - Adding Microsoft Defender Integration
-    - Similar to Sysmon, add a new integration for Microsoft Defender with a custom name (e.g., `DFIR-win-Defender`).
+    - Similar to Sysmon, add a new integration for Microsoft Defender with a custom name (e.g., `ideafieldpro-win-Defender`).
     - Specify the relevant channel names and event IDs to include or exclude as needed.
+      ![brave_4Zd8VxlqgZ](https://github.com/user-attachments/assets/d0e6ca7a-b598-4072-a8f0-9c5706ff4c76)
 
 ### Testing & Troubleshooting
 
@@ -429,88 +431,21 @@ This project showcases my ability to set up, configure, and maintain essential S
 - Firewall Configuration
     - Ensure that your firewall permits incoming connections on port `9200` for Elasticsearch.
 
-### Restarting Services
-
 - Restart the Elastic Agent service if logs do not appear after configuration.
+  ![brave_FeC3yALvl7](https://github.com/user-attachments/assets/4718c220-4ea7-4c2d-b2b7-83ad4a32d08f)
 
+---
 
-- 11 - What is a Brute Force Attack?
+## 8. Setting Up the Ubuntu Server
 
-# Summary of "Day 11: Brute Force Attacks" - 30-Day Defend for SOC Analyst Challenge
-
-## Introduction
-
-- This video is part of a 30-day challenge aimed at helping aspiring SOC analysts gain practical experience.
-- If you haven't started from Day 1, it is recommended to pause and do so.
-
-## What is a Brute Force Attack?
-
-- A Brute Force attack involves trying every possible password combination to gain unauthorized access to an account.
-- The analogy used is attempting to unlock luggage with a keypad by testing every combination, starting from `0000`.
-
-## Common Sources of Brute Force Attacks
-
-- Many online services, such as remote desktops, are exposed to the internet, allowing attackers to attempt logins using leaked credentials from data breaches or through social engineering.
-
-## Types of Brute Force Attacks
-
-1. **Simple Brute Force Attack**
-    - Attempts every combination systematically (e.g., `0000`, `0001`, etc.).
-    - Usually automated.
-2. **Dictionary Attack**
-    - Uses a list of common words and phrases instead of all numerical combinations.
-    - Targets passwords that are often human-generated and predictable.
-3. **Credential Stuffing**
-    - Involves using leaked credential dumps to try various username-password combinations to access accounts.
-
-## Protection Against Brute Force Attacks
-
-### 1. Use Long Passwords or Passphrases
-
-- Passwords should ideally be at least 15 characters long and include uppercase letters, numbers, and special characters.
-- Consider using password managers to generate and store complex passwords securely.
-
-### 2. Enable Multi-Factor Authentication (MFA)
-
-- MFA adds an extra layer of security, requiring an additional form of verification (like a text or authenticator app) after the initial password input.
-
-### 3. Stay Vigilant
-
-- Be cautious with emails or prompts asking for login information. Always verify the source.
-- Monitor accounts for unauthorized access and change passwords if a data breach occurs.
-
-## Common Tools Used for Brute Force Attacks
-
-1. **Hydra**
-2. **Hashcat**
-3. **John the Ripper**
-
-> Note: Use these tools responsibly and only on machines you own or have permission to test.
-> 
-
-## Conclusion
-
-- The video emphasizes understanding brute force attacks, the different types, how to protect oneself, and familiarizing with commonly used tools.
-- The next video will focus on setting up an SSH server in the cloud to observe brute force attacks in real time.
-- 12 - Ubuntu Server 24.02 Installation
-
-# Summary of Day 12: 30-Day MyDfir SOC Analyst Challenge
-
-## Overview
-
-The focus of Day 12 is on setting up an SSH server in the cloud and reviewing authentication logs in real-time.
-
-## Key Steps
-
-### Setting Up the SSH Server
-
-1. **Vultr Setup**:
+- **Vultr Setup**:
     - Visit [Vultr.com](https://vultr.com/) and sign in.
     - Click on "Deploy" in the top right corner and select "Deploy New Server."
     - Choose a shared CPU plan; the host selects Ubuntu version 24.0.
     - Opt for a basic configuration: 1 CPU and 1 GB memory, without auto backups or IPv6.
-    - Name the server appropriately (e.g., `dfir-linux`), which is crucial for following the challenge.
-2. **Deployment**:
+    - Name the server appropriately (e.g., `ideafieldpro-linux`).
+    
+- **Deployment**:
     - Once the server is running, access it via PowerShell using SSH:
         
         ```bash
@@ -523,14 +458,14 @@ The focus of Day 12 is on setting up an SSH server in the cloud and reviewing au
         apt-get update
         apt-get upgrade
         ```
-        
 
 ### Reviewing Authentication Logs
 
-1. **Location of Logs**:
+- **Location of Logs**:
     - Authentication logs are stored in `/var/log`.
     - The specific log file of interest is `auth.log`.
-2. **Analyzing Logs**:
+      
+- **Analyzing Logs**:
     - Use the `cat` command to view the `auth.log`:
         
         ```bash
@@ -538,7 +473,8 @@ The focus of Day 12 is on setting up an SSH server in the cloud and reviewing au
         ```
         
     - Initially, there will be minimal activity but expect to see failed authentication attempts after some time.
-3. **Filtering Failed Attempts**:
+      
+- **Filtering Failed Attempts**:
     - Use `grep` to filter entries containing "failed":
         
         ```bash
@@ -551,235 +487,134 @@ The focus of Day 12 is on setting up an SSH server in the cloud and reviewing au
         grep -i failed auth.log | grep -i root
         ```
         
-4. **Extracting IP Addresses**:
+- **Extracting IP Addresses**:
     - Utilize the `cut` command to isolate IP addresses from failed login attempts:
         
         ```bash
         grep -i failed auth.log | grep -i root | cut -d' ' -f9
         ```
         
+---
 
-### Conclusion
+## 9. Install Elastic Agent on the Server (Ubuntu)
 
-- The video concludes with a recap of successfully setting up the SSH server and observing real-time login attempts, some of which are indicative of brute force attacks.
-- The next video will cover installing an Elastic Agent on the SSH server to forward logs to an Elasticsearch instance for further analysis.
-- 13 - How to Install Elastic Agent on Ubuntu
-
-# Summary of Day 13: 30-Day SOC Analyst Challenge
-
-## Introduction
-
-Day 13 of the 30-day SOC Analyst Challenge focuses on installing an Elastic Agent onto an SSH server that was set up on Day 12. This step is essential for enabling log querying on an Elasticsearch instance.
-
-## Key Steps in the Process
-
-### 1. Accessing the Elastic Web GUI
+### Accessing the Elastic Web GUI
 
 - Navigate to the Elastic web GUI.
 - Click on the hamburger icon in the top left corner.
 - Scroll down and select **Fleet Management**.
 
-### 2. Creating a New Agent Policy
+### Creating a New Agent Policy
 
-- Click on **Agent Policy** to create a new policy named `mydf-Linux-D-policy`.
+- Click on **Agent Policy** to create a new policy named such as `ideafieldpro-Linux-policy`.
 - Select the **system-3** policy type (note: your version may vary).
 - This policy will specify which logs the SSH server will push to the Elasticsearch instance.
+  ![brave_ncsS6Kktqp](https://github.com/user-attachments/assets/de4aaeaf-9894-4d79-8e95-6cf6bcd337ad)
 
-### 3. Verifying Log Locations
+
+### Verifying Log Locations
 
 - The default path for logs is `/var/log/secure`.
 - If using Ubuntu, check `/var/log/auth.log` for authentication logs, as it differs from Red Hat/CentOS systems.
 
-### 4. Adding the Agent
+### Adding the Agent
 
 - Go back to **View Agent Policies** and click **Add Agent**.
-- Choose the `df-Linux-DP` policy created earlier.
+- Choose the `ideafieldpro-Linux-policy` policy created earlier.
 - Select **Enroll in Fleet**, specifying Linux as the operating system.
 
-### 5. Installing the Elastic Agent
+### Installing the Elastic Agent
 
-- Copy and paste the provided command into your PowerShell session to install the Elastic Agent.
+- Copy and paste the provided command into a PowerShell ssh session to install the Elastic Agent.
 - If you encounter an error regarding an X.509 certificate, add the `-insecure` flag to bypass it.
 
-### 6. Confirming Installation
+### Confirming Installation
 
 - Verify that the Elastic Agent has been successfully installed and that data is flowing into the Elasticsearch instance.
-- Check by going to **Discover** and filtering by agent name.
+  ![brave_QFcVq3DlAK](https://github.com/user-attachments/assets/9b1a8da5-41ec-4591-917f-985d48723f49)
 
-## Analyzing Logs
+- Check by going to **Discover** and filtering by agent name.
+  ![brave_WBd9MsW3OP](https://github.com/user-attachments/assets/296d8927-7535-460d-8c9d-7c3934630049)
+
+### Analyzing Logs
 
 - Look for authentication failures by searching with relevant keywords.
-- The video demonstrates how to expand log events and adjust settings for easier viewing.
+  ![brave_J5TJHqYx6j](https://github.com/user-attachments/assets/8f70cdf2-f28b-494b-aeca-a600994494a9)
 
-## Conclusion
+---
 
-By successfully installing the Elastic Agent and beginning to analyze logs, participants enhance their practical skills for SOC analysis. Day 13 wraps up with a reminder of upcoming topics, including creating alerts for brute-force activity and building a dashboard.
+## 10. Creating SSH Brute Froce Alert Dashboards in Kibana
 
-- 14 - How to Create Alerts and Dashboards in Kibana
-
-# Summary of Day 14 - 30-Day MyDfir SOC Analyst Challenge
-
-In this session, we focus on creating an **SSH Brute Force Alert Dashboard** to visualize attacks.
-
-## Objectives
-
-1. **Understand Brute Force Attacks**: Recognize what a Brute Force attack looks like in logs.
-2. **Query Logs**: Learn how to query logs for failed authentication attempts.
-3. **Create Alerts**: Set up alerts for detecting Brute Force activity.
-4. **Visualize Data**: Create a dashboard for better visualization of the attack data.
-
-## Step-by-Step Breakdown
-
-### 1. Querying Logs
+### Querying Logs
 
 - Start by accessing the Elastic Search instance to query logs.
 - Use the `Discover` feature to filter relevant data based on your SSH server.
 - Look for **failed authentications**, which indicate attempted unauthorized access.
 
-### 2. Identifying Important Fields
+### Identifying Important Fields
 
 - Key fields to focus on:
     - **Failed attempts**: Count the number of failed logins.
     - **Usernames**: Identify the usernames being targeted.
     - **Source IPs**: Track the IP addresses attempting access.
 
-### 3. Creating Alerts
+### Creating Alerts
 
 - Once you've filtered for failed attempts, save your query as `SSH Failed Activity`.
 - Navigate to the alerts tab and create a new alert:
     - Set thresholds (e.g., 5 failed attempts within 5 minutes).
     - Adjust the timing (e.g., check every minute).
 
-### 4. Building the Dashboard
+### Building the Dashboard
 
 - Head to the **Analytics** tab to create a visual representation of your data.
 - Use a map layer to pinpoint where attacks are originating from, leveraging geolocation based on source IPs.
 - Ensure that your queries correctly reflect the data you're interested in visualizing.
 
-### 5. Successful Authentication Queries
+### Successful Authentication Queries
 
 - Duplicate the previous dashboard and adjust it to show successful authentications.
 - Modify the query to focus on accepted attempts rather than failed ones.
 
-## Conclusion
+---
 
-Congratulations! You've successfully:
+## 11. Reviewing Windows Authentication Logs & Creating Alerts in Kibana
 
-- Created an alert for SSH Brute Force activity.
-- Designed a dashboard to visualize both failed and successful authentication attempts.
-
-### Next Steps
-
-In the next video, you'll learn about common services that many organizations use and commonly abused.
-
-- 15 - Remote Desktop Protocol Intro
-
-# Summary of RDP Abuse and Protection Strategies
-
-## Introduction
-
-The video discusses the abuse of the Remote Desktop Protocol (RDP), highlighting its prevalence in ransomware breaches and offering practical advice for aspiring security operations center (SOC) analysts.
-
-## What is RDP?
-
-- **Definition**: RDP (Remote Desktop Protocol) is a proprietary protocol developed by Microsoft that allows authorized users to connect remotely to another machine.
-- **Functionality**: It operates over TCP and uses the default port 3389, enabling remote access for troubleshooting and management.
-
-## RDP Abuse Statistics
-
-- **Prevalence**: In 2023, it was noted that 90% of ransomware breaches involved RDP abuse.
-- **Common Attack Vector**: Exposed RDP services can be targeted by attackers to gain unauthorized access through methods like brute force attacks.
-
-## How Attackers Abuse RDP
-
-1. **Initial Access**: Attackers exploit exposed RDP services on production or development servers.
-2. **Brute Force Attacks**: They may use brute force techniques to authenticate using stolen or guessed credentials.
-3. **Lateral Movement**: Once inside, attackers can perform actions such as credential dumping and lateral movement to compromise additional systems.
-
-## Finding Exposed RDP Services
-
-- The video introduces tools like **Shodan**:
-    - **Creating an Account**: Users are encouraged to sign up for Shodan.
-    - **Searching for Exposed RDP**: Users can search for the default port 3389 to find assets with RDP exposed.
-- Another tool mentioned is **Census**:
-    - Users can filter searches specifically for RDP services and analyze public IP addresses.
-
-## Recommendations for Protecting Against RDP Abuse
-
-1. **Disable RDP When Not Needed**: Ensure RDP is disabled on development servers once their use is complete.
-2. **Use Multi-Factor Authentication (MFA)**: Add an additional layer of security to accounts.
-3. **Restrict Access**: Implement firewall rules to limit access to RDP servers within a specific IP range, ideally placing them behind a VPN.
-4. **Strengthen Passwords**: Use strong passwords with at least 15 characters, including upper and lowercase letters, numbers, and special characters.
-5. **Disable Default Accounts**: Prevent credential stuffing attacks by disabling default local accounts.
-
-## Conclusion
-
-The video emphasizes the importance of understanding RDP, recognizing how it can be abused, and implementing protective measures. Future content promises to cover RDP logs and alert setups for brute force attacks.
-
-- 16 - How to Create Alerts and Dashboards in Kibana
-
-# Summary of Day 16: 30-Day SOC Analyst Challenge
-
-## Overview
-
-Day 16's focus is on reviewing authentication logs from a Windows server and creating Brute Force attack alerts.
-
-## Key Steps Covered
-
-### 1. Review Authentication Logs
+### Review Authentication Logs
 
 - **Accessing Logs**: The host navigates to the Elastic web GUI and selects the "Discover" option.
 - **Filtering Events**: He filters events specifically for an RDP server, identifying approximately 32,000 failed authentication attempts.
 - **Identifying Event ID**: The focus is on Event ID `4625`, which indicates failed authentication attempts. The host explains how to find this information by searching for the event ID.
 
-### 2. Analyzing Failed Authentication Attempts
+### Analyzing Failed Authentication Attempts
 
 - **Expanding Event Details**: The first failed event is expanded to gather fields such as source IP address and username.
 - **Creating a Search Query**: A search query for failed RDP activity is saved, named "RDP Failed Activity". This query helps in monitoring failed logins.
 
-### 3. Testing Authentication
+### Testing Authentication
 
 - **Testing Logins**: The host tests the login with a specific username and checks the logs for successful and failed attempts. He emphasizes the importance of understanding log types:
     - **Logon Type 3**: Network-based authentication (e.g., RDP).
     - **Logon Type 10**: Remote interactive logon.
 
-### 4. Creating Alerts
+### Creating Alerts
 
 - **Set Up Alerts**: The video dives into creating alerts for detecting brute force attacks.
 - **Search Threshold Rule**: A search threshold rule is created based on Event ID `4625`, configured to check every minute for multiple failed login attempts.
 - **Rule Details**: The rule captures user details and source IP addresses.
 
-### 5. Enhancing Alert Information
+### Enhancing Alert Information
 
 - **Creating Detection Rules**: The host explains the process of creating more informative detection rules that provide detailed information compared to standard alerts.
 - **Custom Queries**: Custom queries are introduced to include usernames, allowing analysts to better understand the context of failed authentication attempts.
 
-### 6. Final Thoughts
-
-- The host encourages viewers to further explore alert options and improve their configurations to enhance security monitoring.
-- Emphasizes the importance of using strong passwords, implementing MFA, and limiting access to services exposed to the internet.
-- Preview of the next video includes creating a dashboard to visualize authentication attempts.
-
-## Conclusion
-
-The video provides valuable insights into using Elastic security tools for monitoring authentication attempts and setting up alerts for potential security issues. Viewers are encouraged to experiment with different configurations and remain vigilant about securing their systems.
 
 ---
 
-This summary should help you grasp the main points discussed in Day 16 of the SOC Analyst Challenge. Are there any specific areas you’d like to explore further?
 
-Cheers, Craig
+## 12. Creating Dashboards for Windows RDP Activty in Kibana
 
-- 17 - How to Create Alerts and Dashboards in Kibana
-
-# Summary of Day 17: 30-Day SOC Analyst Challenge
-
-## Objective
-
-- The goal is to create a dashboard that focuses on Remote Desktop Protocol (RDP) activity generated by a Windows server.
-- This exercise builds upon previous lessons, specifically from Day Five.
-
-## Creating the Dashboard
+### Creating the Dashboard
 
 ### Step 1: Query Setup
 
@@ -814,67 +649,11 @@ Cheers, Craig
 - Ensure all queries reflect accurate data by editing and updating titles and configurations.
 - Save all changes to prevent data loss.
 
-## Conclusion
+---
 
-- The video wraps up with encouragement to build additional alerts and dashboards for practice.
-- The host teases the next video focusing on command and control tactics using the Mythic framework.
-- 18 - Command and Control Introduction
+## 13. Creating an Attack Diagram
 
-# Summary of Command and Control in Cybersecurity
-
-## Overview
-
-In this video, the host discusses the concept of Command and Control (C2) within the context of cybersecurity, particularly as part of a 30-day challenge aimed at aspiring Security Operations Center (SOC) analysts. The objective is to provide practical experience in understanding how malicious executables operate and the tools used for establishing C2 sessions.
-
-## Key Points
-
-### Malicious Executable Behavior
-
-- **Execution of Commands**: Upon running a malicious binary, it often executes a series of discovery commands (e.g., `ipconfig`, `nslookup`, `net user`) to gather information about the compromised system.
-- **Persistence Mechanisms**: Many malicious binaries create services or scheduled tasks to ensure they survive system reboots.
-- **Establishing C2 Sessions**: A primary action of most malicious binaries is to establish a command and control session, allowing attackers to remotely control the victim's system.
-
-### Importance of C2
-
-- **Definition**: Command and Control (C2) refers to techniques that adversaries use to communicate with compromised systems.
-- **Objectives**: By establishing a C2 channel, attackers can execute various actions, including stealing sensitive information or moving laterally within a network.
-
-### Tools and Frameworks for C2
-
-The video highlights several common C2 frameworks used by attackers:
-
-1. **Metasploit**
-    - A popular framework often used in penetration testing.
-    - Provides various exploits and auxiliary modules to probe target machines.
-2. **Cobalt Strike**
-    - A commercial product used for adversary emulation.
-    - Commonly detected in compromised environments, making it important for SOC analysts to recognize.
-3. **Sliver**
-    - An open-source adversary emulation framework created by Bishop Fox.
-    - Supports multiple methods for establishing C2 connections (e.g., HTTP, DNS).
-4. **Mythic**
-    - The framework that will be utilized in the 30-day challenge.
-    - Built using Go and Docker, it has a web-based user interface and supports tracking payloads and callbacks effectively.
-
-### Next Steps
-
-- The upcoming video will focus on crafting an attack against a Windows server and setting up the Mythic server to deploy an agent for establishing a successful C2 session.
-
-## Conclusion
-
-The video serves as an introductory lesson on the significance of command and control in cybersecurity, providing insights into how attackers operate and the tools they use.
-
-- 19 - How to Create an Attack Diagram
-
-# Summary: Day 19 of the 30-Day SOC Analyst Challenge
-
-## Overview
-
-The focus of this day is creating an attack diagram that outlines the steps to compromise a target machine.
-
-## Key Steps in the Attack Diagram Creation
-
-### 1. **Setting Up the Attack Diagram**
+### **Setting Up the Attack Diagram**
 
 - The presenter uses **draw.io** to create the attack diagram.
 - Main components included:
@@ -882,7 +661,7 @@ The focus of this day is creating an attack diagram that outlines the steps to c
     - **Windows Server** (target server)
     - **Attacker's Laptop** (using Kali Linux)
 
-### 2. **Phases of Attack**
+### **Phases of Attack**
 
 The attack is broken down into six distinct phases:
 
@@ -914,27 +693,30 @@ The attack is broken down into six distinct phases:
 
 - Create a fake password file named `passwords.txt` on the Windows Server and download it through the established C2 session.
 
-### 3. **Final Notes on the Attack Diagram**
+### **Final Notes on the Attack Diagram**
 
 - The presenter emphasizes that this diagram serves as a conceptual map for understanding the attack pathway and steps involved in successfully compromising a target machine.
 - Encourages viewers to create their own attack diagrams, especially focusing on SSH servers for additional practice.
-- 20 - Mythic Server Setup Tutorial
 
-# Summary of Day 20 of the 30-Day SOC Analyst Challenge
+---
 
-## Setting Up Mythic C2
+## 14. Mythic Server Setup
 
-1. **Cloud Provider Setup**
+### Setting Up Mythic C2
+
+- **Cloud Provider Setup**
     - The presenter chooses Vulture as the cloud provider.
     - Steps include logging in, clicking "Deploy," and selecting options such as:
         - Cloud Compute with shared CPU.
         - Operating system: Ubuntu with 4 GB RAM.
         - No need for auto backups or IPv6.
-2. **Installing Kali Linux**
+          
+- **Installing Kali Linux**
     - Download Kali Linux from the official website.
     - Select the virtual machine option suitable for the hypervisor being used (e.g., VMware).
     - Extract the downloaded file and ensure that file name extensions are visible to find the `.vmx` file.
-3. **Deploying Mythic C2**
+      
+- **Deploying Mythic C2**
     - Access the Vulture console and log into the server using SSH.
     - Update and upgrade the system repositories:
         
@@ -945,7 +727,8 @@ The attack is broken down into six distinct phases:
         ```
         
     - Install required prerequisites, including Docker Compose.
-4. **Cloning and Installing Mythic**
+      
+- **Cloning and Installing Mythic**
     - Clone the Mythic repository from GitHub:
         
         ```bash
@@ -959,7 +742,7 @@ The attack is broken down into six distinct phases:
         ./install_core_docker_U
         ```
         
-5. **Configuring Docker**
+- **Configuring Docker**
     - If Docker is not running, restart it:
         
         ```bash
@@ -973,79 +756,39 @@ The attack is broken down into six distinct phases:
         ```
         
 
-## Security Configurations
+### Security Configurations
 
 - Set up firewall rules to restrict communication to only necessary targets.
 - Create a firewall group in Mythic for added security.
 
-## Accessing Mythic Web GUI
+### Accessing Mythic Web GUI
 
-- Access the Mythic web interface using the public IP address on port 7443; if an HTTP error appears, add HTTPS.
+- Access the Mythic web interface using the public IP address on port 7443;
+      - If an HTTP error appears, add HTTPS.
 - Default login credentials can be found in the environment variable file.
 
-## Overview of Mythic Features
+### Overview of Mythic Features
 
 - **Dashboard**: Displays callbacks and agent status.
 - **Payload Management**: Options to generate, import, and manage payloads.
 - **Artifact Tracking**: Keeps track of keylogs, screenshots, and other artifacts.
 - **MITRE Attack Mapping**: Provides a way to analyze tasks against MITRE framework categories.
 
-## Next Steps
+---
 
-- Upcoming videos will focus on creating a Mythic agent and attacking a Windows server machine. Emphasis on practicing within a controlled environment where permission is granted.
-- 21 - Mythic Agent Setup Tutorial
+## 15. Mythic Agent Setup
 
-# Summary of the 30-Day Sock Analyst Challenge - Day 21
-
-## Introduction
-
-- The challenge involves performing a Brute Force attack, generating a Mythic agent, and establishing a successful C2 (Command and Control) session with a Windows server.
-
-## Objectives for Today
-
-1. Perform a Brute Force attack from a Kali Linux machine onto a Windows server.
-2. Execute discovery commands and implement defense evasion techniques.
-3. Use Mythic C2 to generate a payload and create a Mythic agent on the Windows server.
-4. Establish a C2 connection and download a password text file from the Windows server.
-
-## Steps to Achieve the Objectives
-
-### 1. Setting Up the Windows Server
+### Setting Up the Windows Server
 
 - Create a fake file named `passwords.txt` on the Windows server and set a common password (`Winter2024!`).
 - Adjust local group policies to change password requirements, allowing simpler passwords for testing.
 
-### 2. Performing Brute Force Attack
+### Performing Brute Force Attack
 
 - Log into the Kali Linux machine and prepare for the Brute Force attack using tools like `crowbar`.
 - Use an existing wordlist (`rockyou.txt`) to attempt to crack the administrator's password on the Windows server.
-    
-    CIDR (Classless Inter-Domain Routing) notation is used to specify IP address ranges and subnet masks. Here are the different CIDR notations and their common uses:
-    
-    ### CIDR Notations and Their Common Uses
-    
-    | CIDR Notation | Number of IP Addresses | Common Uses |
-    | --- | --- | --- |
-    | /0 | 4,294,967,296 | Represents all possible IPv4 addresses; used in default routing. |
-    | /1 | 2,147,483,648 | Used for very large networks; rarely seen in practice. |
-    | /8 | 16,777,216 | Often used by large organizations or ISPs; provides a significant number of addresses (e.g., 10.0.0.0/8). |
-    | /16 | 65,536 | Commonly used for medium-sized networks; often seen in corporate settings (e.g., 192.168.1.0/16). |
-    | /20 | 4,096 | Suitable for smaller networks or subnets within larger organizations (e.g., 172.16.0.0/20). |
-    | /24 | 256 | Widely used for local area networks (LANs); typical subnet size for many home and small business networks (e.g., 192.168.1.0/24). |
-    | /25 | 128 | Used for networks where a smaller number of devices are required (e.g., branch offices). |
-    | /26 | 64 | Suitable for very small networks or specific applications (e.g., point-to-point connections). |
-    | /27 | 32 | Often used for small subnets in larger networks or specialized applications. |
-    | /28 | 16 | Typically used for very small networks, such as a few devices or hosts (e.g., small IoT deployments). |
-    | /29 | 8 | Common in point-to-point links or small subnets where only a few devices are needed. |
-    | /30 | 4 | Usually employed for point-to-point connections between two routers (e.g., WAN links). |
-    | /32 | 1 | Represents a single host; often used in firewall rules or specific routing configurations. |
-    
-    ### Summary
-    
-    CIDR notation provides flexibility in IP address allocation and is essential for efficient routing and network management. The choice of CIDR notation depends on the size of the network and the specific requirements of the deployment.
-    
 
-### 3. Executing Commands on the Windows Server
+### Executing Commands on the Windows Server
 
 - Once logged in via RDP (Remote Desktop Protocol), execute discovery commands:
     - `ipconfig`
@@ -1053,13 +796,13 @@ The attack is broken down into six distinct phases:
     - `net localgroup`
 - Disable Windows Defender as part of the defense evasion phase.
 
-### 4. Building and Deploying Mythic Agent
+### Building and Deploying Mythic Agent
 
 - Access Mythic’s web GUI to install the necessary agents (e.g., Apollo).
 - Generate a payload for the Windows machine, specifying the callback host and port.
 - Download the agent and rename it appropriately for execution on the target.
 
-### 5. Establishing Connection and Exfiltration
+### Establishing Connection and Exfiltration
 
 - Use Python's HTTP server module to serve the agent file.
 - Allow necessary ports in the firewall settings to facilitate communication between the agent and Mythic C2.
@@ -1070,20 +813,9 @@ The attack is broken down into six distinct phases:
 - Utilize the established C2 session to issue commands that download the previously created `passwords.txt` file from the Windows server.
 - Verify that the password retrieved matches what was set earlier.
 
-## Conclusion
+---
 
-- The session demonstrates the power of the Mythic framework for conducting penetration testing in an educational context.
-- Viewers are encouraged to further explore Mythic's capabilities and participate in future videos for continuous learning.
-
-## Final Note
-
-The video emphasizes ethical considerations and encourages responsible use of demonstrated techniques in cybersecurity practice.
-
-- 22 - How to Create Alerts and Dashboards in Kibana
-
-# Summary of Day 22 of the 30-Day SOC Analyst Challenge
-
-## Creating Alerts for Mythic C2 Activity
+## 16. Creating Alerts and Dashboards for Mythic C2 Activity in Kibana
 
 1. **Accessing Elastic Web GUI**:
     - Navigate to the "Discover" section by clicking the hamburger icon.
@@ -1100,7 +832,7 @@ The video emphasizes ethical considerations and encourages responsible use of de
 5. **Setting Required Fields**:
     - Essential fields such as timestamp, username, command line, and parent command line are included for detailed analysis.
 
-## Dashboard Creation
+### Dashboard Creation
 
 1. **Building Dashboards**:
     - A dashboard is created to show suspicious activity, including external network connections and process creation events.
@@ -1112,50 +844,10 @@ The video emphasizes ethical considerations and encourages responsible use of de
     - The dashboard is titled "DFIR Dashboard: Suspicious Activity" and includes multiple alerts and visualizations.
     - Emphasis is placed on monitoring specific indicators of compromise, including disabled security tools like Microsoft Defender.
 
-## Conclusion
 
-- The challenge aims to help participants build confidence in creating alerts and dashboards.
-- Viewers are encouraged to continue exploring and customizing their dashboards.
-- The next video will cover ticketing systems for managing alerts effectively.
-- 23 - What is a Ticketing System
+---
 
-# Summary of Day 23: Ticketing System Introduction
-
-## Overview
-
-In this video, the host discusses the importance of tracking alerts generated by security tools and introduces a ticketing system to help aspiring SOC analysts manage these alerts effectively. 
-
-## Key Points
-
-### Importance of Tracking Alerts
-
-- **Security Alerts**: Keeping track of triggered alerts is crucial for identifying potential misconfigurations or attacks.
-- **Ticketing System**: A ticketing system can help organize and manage these alerts, allowing analysts to track tasks and maintain accountability.
-
-### Introduction to Ticketing Systems
-
-- **Purpose**: A ticketing system creates "tickets" to manage tasks such as alerts, customer complaints, or troubleshooting requests.
-- **Audit Trail**: This system provides an audit trail, satisfying the requirements of authentication, authorization, and accounting (AAA).
-
-### Recommended Ticketing System: OS Ticket
-
-- **OS Ticket**: The host introduces OS Ticket, an open-source ticketing system that can be self-hosted or managed for a fee.
-- **Features**:
-    - Customizable fields
-    - Ticket filters for routing
-    - Assignment and transfer of tickets
-    - SLA (Service Level Agreement) settings
-    - Email integration (in the self-hosted version)
-
-### Practical Application
-
-- **Integration**: Integrating OS Ticket into a tech stack mimics a small SOC startup environment, providing a realistic experience for participants in the challenge.
-- **Free Version**: The free self-hosted version of OS Ticket is sufficient for the purpose of this challenge.
-- 24 - osTicket Setup Tutorial
-
-# Summary of Day 24
-
-## Setting Up OS Ticket
+## 17. osTicket Setup
 
 ### Step 1: Deploying a Server
 
@@ -1179,7 +871,7 @@ In this video, the host discusses the importance of tracking alerts generated by
 - **Accessing PHPMyAdmin**: Initial connection errors are resolved by adjusting configuration files to allow access through the public IP address.
 - **User Accounts**: User credentials for root and PMA accounts are set up.
 
-## Installing OS Ticket
+### **Installing OS Ticket**
 
 ### Step 4: Downloading OS Ticket
 
@@ -1197,40 +889,31 @@ In this video, the host discusses the importance of tracking alerts generated by
 - After addressing some errors regarding email settings, the installation is successfully completed.
 - **File Permissions**: The presenter discusses how to change file permissions using Windows PowerShell.
 
-## Conclusion
 
-- **Accessing OS Ticket**: Instructions are given on how to access the OS Ticket URL and log in as an admin.
-- **Next Steps**: Viewers are encouraged to watch the next video, which will cover integrating OS Ticket into a tech stack for managing alerts.
-- 25 - osTicket + ELK Integration
+---
 
-# Summary of Day 25
-
-## Objective
-
-- The main goal for Day 25 is to integrate OS Ticket with Elastic Stack and confirm the integration by sending a test alert.
-
-## Steps for Integration
+## 18. osTicket + ELK Integration
 
 ### Accessing OS Ticket
 
-1. Log into the OS Ticket control panel.
-2. Navigate to the Admin panel and select `Manage`, then `API`.
-3. Click `Add New API Key`, entering the private IP address of the OS Ticket server if it's in the same Virtual Private Cloud (VPC), or the public IP if not.
+- Log into the OS Ticket control panel.
+- Navigate to the Admin panel and select `Manage`, then `API`.
+- Click `Add New API Key`, entering the private IP address of the OS Ticket server if it's in the same Virtual Private Cloud (VPC), or the public IP if not.
 
 ### Setting Up Elastic Stack
 
-1. Open the Elastic interface and go to `Management`.
-2. Select `Stack Management`, then `Alerts and Insights`.
-3. Click on `Connectors` and choose to create a new connector.
-4. Start a free 30-day trial to enable API connections if you're using a free license.
+- Open the Elastic interface and go to `Management`.
+- Select `Stack Management`, then `Alerts and Insights`.
+- Click on `Connectors` and choose to create a new connector.
+- Start a free 30-day trial to enable API connections if you're using a free license.
 
 ### Creating the Connector
 
-1. Use a webhook connector to send alerts from Elastic to OS Ticket.
-2. Set up the webhook with the OS Ticket's IP address and API key.
-3. Configure the body for the webhook request using an XML payload example from OS Ticket’s GitHub page.
+- Use a webhook connector to send alerts from Elastic to OS Ticket.
+- Set up the webhook with the OS Ticket's IP address and API key.
+- Configure the body for the webhook request using an XML payload example from OS Ticket’s GitHub page.
 
-## Troubleshooting Connection Issues
+### Troubleshooting Connection Issues
 
 - If encountering a timeout error during testing, check network connections:
     - SSH into the ELK server to verify IP addresses.
@@ -1238,40 +921,28 @@ In this video, the host discusses the importance of tracking alerts generated by
 
 ### Finalizing Integration
 
-1. Adjust the network settings on your OS Ticket server if necessary to ensure it has a private IP.
-2. Rerun the test for the connector after making any adjustments.
+- Adjust the network settings on your OS Ticket server if necessary to ensure it has a private IP.
+- Rerun the test for the connector after making any adjustments.
 
-## Conclusion
+---
 
-- After successful integration, alerts generated in Elastic can now automatically create tickets in OS Ticket.
-- This integration enhances tracking and auditing capabilities for SOC analysts.
-
-## Recap of Previous Steps
-
-- The challenge included spinning up an Elastic Search instance, setting up two servers (Windows and Linux), installing agents, creating alerts for security activities, and now integrating ticketing systems.
-- 26 - Investigate SSH Brute Force Attack
-
-# Summary of Day 26
-
-## Key Points
-
-### Investigating SSH Alerts
-
-- The host accesses the alerts section and finds a total of 195 alerts, with the first one dated August 14th.
-- The investigation begins by using **Timelines**, a feature that helps visualize alerts and events related to a specific user. This tool is suggested for deeper analysis and is encouraged to be explored further.
+## 19. Investigate SSH Brute Force Attack
 
 ### Steps to Investigate Brute Force Alerts
 
-1. **Identifying the Source IP**:
+- **Identifying the Source IP**:
     - The first step is to note the source IP address from the alert, which is reported as `194.50.201.6`.
     - The host checks this IP against known databases to determine its reputation for brute force activity.
-2. **Using External Resources**:
+      
+- **Using External Resources**:
     - **AbuseIPDB**: The IP is found to be reported 1,816 times with a confidence level of 100% indicating malicious behavior.
     - **GreyNoise**: A search reveals that the IP is known to use tools such as zmap for SSH brute-forcing.
-3. **Identifying Affected Users**:
+      
+- **Identifying Affected Users**:
     - The host uses Kibana to query events related to the identified IP over the last 30 days.
     - Four distinct users are affected: root, Oracle, guest, and test accounts.
-4. **Looking for Successful Logins**:
+      
+- **Looking for Successful Logins**:
     - Initial queries for successful logins return no results, suggesting that all login attempts were unsuccessful.
     - The host emphasizes the importance of double-checking queries and adjusting capitalization since it can affect search results.
 
@@ -1289,42 +960,34 @@ In this video, the host discusses the importance of tracking alerts generated by
 
 - Finally, the process of assigning and closing tickets is demonstrated, highlighting the importance of communication among team members to avoid duplicated efforts.
 
-## Conclusion
+---
 
-The video wraps up with encouragement to continue practicing investigation skills and building confidence in identifying suspicious activities. The next video will focus on RDP alerts.
+## 20. Investigate RDP Brute Force Attack
 
-- 27 - Investigate RDP Brute Force Attack
+### Investigating RDP Brute Force Attacks
 
-# Summary of Day 27: Investigating RDP Brute Force Alerts
-
-## Introduction
-
-- The focus of Day 27 is on investigating RDP (Remote Desktop Protocol) Brute Force alerts.
-
-## Investigating RDP Brute Force Attacks
-
-1. **Accessing Alerts:**
+- **Accessing Alerts:**
     - The presenter demonstrates how to navigate to the alert section of their security tool.
     - They filter alerts to focus specifically on RDP Brute Force alerts from the past 30 days.
-2. **Details of the Alert:**
+- **Details of the Alert:**
     - An example alert is examined, revealing the source IP address (81.1.163.20) and the use of the username "administrator."
     - The presenter mentions creating a ticket in OS Ticket for the alert.
-3. **Using AbuseIPDB:**
+- **Using AbuseIPDB:**
     - The presenter checks the flagged IP address on AbuseIPDB, which shows it has been reported multiple times for suspicious activity.
     - The IP is associated with RDP Brute Force attempts and categorized as originating from Russia.
-4. **Gray Noise Analysis:**
+- **Gray Noise Analysis:**
     - They also analyze the IP using Gray Noise, which identifies scanning activity but cannot determine intent.
     - The analysis reveals that this IP is classified as a "RDP crawler," indicating potential malicious activity.
 
 ## Addressing Key Questions
 
-1. **Is the IP Known for Brute Force Activity?**
+- **Is the IP Known for Brute Force Activity?**
     - Yes, confirmed through AbuseIPDB reports.
-2. **Are There Other Users Affected by This IP?**
+- **Are There Other Users Affected by This IP?**
     - The analysis shows that only the "administrator" account is affected, with no successful logins recorded.
-3. **Successful Login Attempts:**
+- **Successful Login Attempts:**
     - The presenter looks for event code 4624, indicating successful authentications, and finds no successful logins from the flagged IP address.
-4. **Investigating Another IP:**
+- **Investigating Another IP:**
     - They investigate another IP involved in a previous RDP Brute Force attempt and find similar results regarding its malicious activity.
 
 ## Conclusion and Next Steps
@@ -1332,15 +995,10 @@ The video wraps up with encouragement to continue practicing investigation skill
 - The presenter emphasizes the importance of thorough investigation, including checking for successful logins and understanding potential compromises.
 - They encourage viewers to explore processes like persistence mechanisms and lateral movements in their investigations.
 - Future videos will continue to build on these investigative techniques, including discussions around Mythic C2 agent activities.
-- 28 - Investigate Mythic Agent
 
-# Summary of Day 28
+---
 
-## Overview
-
-In this video, the host continues the SOC Analyst Challenge focusing on investigating a common Command and Control (C2) framework called Mythic.
-
-## Key Points
+## 21. Investigate Mythic Agent
 
 ### Getting Started with Mythic C2
 
@@ -1372,32 +1030,19 @@ In this video, the host continues the SOC Analyst Challenge focusing on investig
 - **Testing Alerts**: The host interacts with the Mythic server and demonstrates how to generate alerts by executing commands.
 - **Monitoring Telemetry**: Both endpoint telemetry and network-related data are emphasized for a comprehensive investigation.
 
-### Conclusion and Encouragement
+---
 
-- The host encourages viewers to practice and explore telemetry related to C2 agents like Mythic, emphasizing the importance of hands-on experience.
-- Future videos will cover installing Elastic EDR (Elastic Defend) and troubleshooting techniques.
+## 22. Elastic Defend Setup
 
-## Final Thoughts
+### Key Steps in the Installation Process
 
-This video provides valuable insights into practical investigation methods for SOC analysts, focusing on identifying C2 frameworks and analyzing suspicious activities.
-
-- 29 - Elastic Defend Setup Tutorial
-
-# Summary of Day 29
-
-## Introduction
-
-The focus is on installing and configuring Elastic's EDR (Endpoint Detection and Response) tool, known as Elastic Defend.
-
-## Key Steps in the Installation Process
-
-1. **Downloading and Installing Elastic Defend**:
+- **Downloading and Installing Elastic Defend**:
     - The presenter guides viewers to download and install Elastic Defend on their endpoints to start protecting against malicious activity.
     - Note: Free subscriptions do not allow for remote host isolation.
-2. **Integration Setup**:
+- **Integration Setup**:
     - Once installed, users should navigate to the top-left corner (the hamburger icon) and scroll to "Integrations."
     - Click on Elastic Defend to add the integration, providing a name and description for the setup.
-3. **Configuration Options**:
+- **Configuration Options**:
     - There are four configuration types:
         - Data Collection
         - Next-Gen Antivirus
@@ -1405,11 +1050,11 @@ The focus is on installing and configuring Elastic's EDR (Endpoint Detection and
         - Complete EDR
     - The presenter selects the "Complete EDR" option for full telemetry and protection.
     - Configurations can be set for traditional endpoints or cloud workloads.
-4. **Endpoint Management**:
+- **Endpoint Management**:
     - The Windows Server is selected for integration, and changes are saved for deployment.
     - Once deployed, users can view endpoints under the "Security" section.
 
-## Demonstrating EDR Capabilities
+### Demonstrating EDR Capabilities
 
 - The presenter executes a test by terminating a potentially harmful process (`defer D30.exe`) to showcase Elastic Defend's alert mechanisms.
 - An alert is generated indicating that the file contains a virus, demonstrating effective malware prevention.
@@ -1425,7 +1070,3 @@ The focus is on installing and configuring Elastic's EDR (Endpoint Detection and
 - The presenter discusses editing rule settings in Elastic Defend:
     - Users can set responses to isolate the host if malicious activity is detected.
     - A command prompt demonstration shows an infinite ping command, illustrating that network activity is limited when a host is isolated.
-
-## Conclusion
-
-- Participants are encouraged to continue their learning in a Minick environment to gain further practical experience.
