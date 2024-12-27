@@ -78,7 +78,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 - **VPC Setup:**
     - Navigate to the "Products" section.
     - Click on "Network" and select "VPC 2.0".
-    - Create a new VPC ensuring that the location matches the virtual machines to be created (e.g., Toronto).
+    - Create a new VPC ensuring that the location matches the virtual machines to be created (e.g., Osaka).
     - Configure the IP range (e.g., `172.31.0.0/24`) and name it "ideafieldpro analyst".
 
 ### **Deploying a Virtual Machine**
@@ -261,7 +261,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 - **Deploying a New Server**:
     - Select "Deploy" and then "Deploy New Server."
     - Choose "Cloud Compute" with shared CPU, as a high-performance server isn't necessary for this task.
-    - Set the server location to "Toronto" (the same region as before) and select the latest Windows Server 2022 image.
+    - Set the server location to "Osaka" (the same region as before) and select the latest Windows Server 2022 image.
     - Opt for the $24/month plan, which has 1 vCPU and 2 GB of memory to save money/credits.
 
 - **Network Configuration**:
@@ -288,7 +288,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 ### Setup Process
 
 - **Creating the Fleet Server**:
-    - A new server is deployed in "Toronto" (the same location as before) using Ubuntu 22.04 with 4 GB of RAM.
+    - A new server is deployed in "Osaka" (the same location as before) using Ubuntu 22.04 with 4 GB of RAM.
     - The server is set up without auto-backups and IPv6.
     - The public IP address for the Fleet server is noted.
       ![brave_pxf58YQwKC](https://github.com/user-attachments/assets/4269792a-3425-4075-81c9-b0780603288b)
@@ -547,7 +547,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ### Querying Logs
 
-- Start by accessing the Elastic Search instance to query logs.
+- Start by accessing the Elastic Search instance web GUI to query logs.
 - Use the `Discover` feature to filter relevant data based on your SSH server.
 - Look for **failed authentications**, which indicate attempted unauthorized access.
 
@@ -564,17 +564,21 @@ This project showcases my ability to set up, configure, and maintain essential S
 - Navigate to the alerts tab and create a new alert:
     - Set thresholds (e.g., 5 failed attempts within 5 minutes).
     - Adjust the timing (e.g., check every minute).
+      ![explorer_Rpy1VY7TMm](https://github.com/user-attachments/assets/16d7f570-8eec-4b48-ade0-8c27d10e1eda)
+
 
 ### Building the Dashboard
 
 - Head to the **Analytics** tab to create a visual representation of your data.
 - Use a map layer to pinpoint where attacks are originating from, leveraging geolocation based on source IPs.
 - Ensure that your queries correctly reflect the data you're interested in visualizing.
+  ![brave_wpNb57fXqs](https://github.com/user-attachments/assets/63a1bca3-9057-479a-abf1-65c47c91274c)
 
 ### Successful Authentication Queries
 
 - Duplicate the previous dashboard and adjust it to show successful authentications.
 - Modify the query to focus on accepted attempts rather than failed ones.
+  ![brave_2eHilzsPch](https://github.com/user-attachments/assets/af4d8dcd-0859-4e18-8838-91947f7377a0)
 
 ---
 
@@ -582,26 +586,30 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ### Review Authentication Logs
 
-- **Accessing Logs**: The host navigates to the Elastic web GUI and selects the "Discover" option.
-- **Filtering Events**: He filters events specifically for an RDP server, identifying approximately 32,000 failed authentication attempts.
-- **Identifying Event ID**: The focus is on Event ID `4625`, which indicates failed authentication attempts. The host explains how to find this information by searching for the event ID.
+- **Accessing Logs**: Navigate to the Elastic web GUI and select the "Discover" option.
+- **Filtering Events**: Filter events specifically for an RDP server and look for failed authentication attempts.
+- **Identifying Event ID**: The focus is on Event ID `4625`, which indicates failed authentication attempts. Searching for the event ID.
 
 ### Analyzing Failed Authentication Attempts
 
 - **Expanding Event Details**: The first failed event is expanded to gather fields such as source IP address and username.
 - **Creating a Search Query**: A search query for failed RDP activity is saved, named "RDP Failed Activity". This query helps in monitoring failed logins.
+  ![brave_mKj9YtRzth](https://github.com/user-attachments/assets/5fa04581-9a9f-4eff-b6e8-f914f84b80a2)
+
 
 ### Testing Authentication
 
-- **Testing Logins**: The host tests the login with a specific username and checks the logs for successful and failed attempts. He emphasizes the importance of understanding log types:
+- **Testing Logins**: Test the login with a specific username and check the logs for successful and failed attempts.
+- Remember log types:
     - **Logon Type 3**: Network-based authentication (e.g., RDP).
     - **Logon Type 10**: Remote interactive logon.
 
 ### Creating Alerts
 
-- **Set Up Alerts**: The video dives into creating alerts for detecting brute force attacks.
+- **Set Up Alerts**: Create an alert to detect brute force attacks.
 - **Search Threshold Rule**: A search threshold rule is created based on Event ID `4625`, configured to check every minute for multiple failed login attempts.
 - **Rule Details**: The rule captures user details and source IP addresses.
+  ![brave_nonfMnxbOu](https://github.com/user-attachments/assets/daee37a8-a8af-412b-ae22-e06cbe2d4fe0)
 
 ### Enhancing Alert Information
 
@@ -621,12 +629,13 @@ This project showcases my ability to set up, configure, and maintain essential S
 - Navigate to the Elastic web GUI and select the "Maps" feature.
 - Use the saved query to analyze authentication attempts related to RDP:
     - **Event Code**: `4625` for failed attempts.
-- Set the time filter to the last 7 days.
+- Make sure to set the time filter so results are displayed.
 
 ### Step 2: Data Layer Addition
 
 - Add a layer for geographical context using country data.
-- Identify a significant number of failed authentication events originating from Russia.
+- Identify where a significant number of failed authentication events originate from.
+  ![brave_jg4Sd3lm7L](https://github.com/user-attachments/assets/e2de841b-a249-47db-9af4-5becdabe043d)
 
 ### Step 3: Save and Organize
 
@@ -637,12 +646,14 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 - Focus on logon types, specifically logon type `10` (RDP) and `7`.
 - Update the query and save as "RDP Successful Activity".
+  ![brave_HEzUP6lWIH](https://github.com/user-attachments/assets/c6f659e0-f117-47e7-a016-01626cc10ad9)
 
 ## Visualization Enhancements
 
 - Create visual representations of RDP and SSH activities.
 - Add tables showing usernames, source IPs, and country names for both failed and successful authentications.
 - Configure charts to display the top ten values for user activity without grouping remaining values.
+  ![brave_1fO5vjOIXk](https://github.com/user-attachments/assets/8fe82d97-a9c6-434f-8314-82503d608164)
 
 ## Final Adjustments
 
@@ -655,7 +666,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ### **Setting Up the Attack Diagram**
 
-- The presenter uses **draw.io** to create the attack diagram.
+- Use **draw.io** to create the attack diagram.
 - Main components included:
     - **Mythic C2 Server** (Command and Control server)
     - **Windows Server** (target server)
@@ -665,38 +676,32 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 The attack is broken down into six distinct phases:
 
-### **Phase One: Initial Access**
+- **Phase One: Initial Access**
+    - Perform an **RDP brute force attack** against the Windows Server to gain access.
 
-- Perform an **RDP brute force attack** against the Windows Server to gain access.
+- **Phase Two: Discovery**
+    - After successful access, run discovery commands:
+        - `ipconfig`
+        - `net user`
+        - `net group`
 
-### **Phase Two: Discovery**
+- **Phase Three: Execution**
+    - Download and execute the **Mythic agent** on the Windows Server using PowerShell:
+        - Utilize `IEX` (Invoke Expression) to download the agent.
 
-- After successful access, run discovery commands:
-    - `ipconfig`
-    - `net user`
-    - `net group`
+- **Phase Four: Defense Evasion**
+    - Disable Windows Defender on the Windows Server to avoid detection before execution.
 
-### **Phase Three: Execution**
+- **Phase Five: Command and Control (C2)**
+    - Establish a command and control session with the Mythic C2 server, enabling remote control over the target.
 
-- Download and execute the **Mythic agent** on the Windows Server using PowerShell:
-    - Utilize `IEX` (Invoke Expression) to download the agent.
-
-### **Phase Four: Defense Evasion**
-
-- Disable Windows Defender on the Windows Server to avoid detection before execution.
-
-### **Phase Five: Command and Control (C2)**
-
-- Establish a command and control session with the Mythic C2 server, enabling remote control over the target.
-
-### **Phase Six: Exfiltration**
-
-- Create a fake password file named `passwords.txt` on the Windows Server and download it through the established C2 session.
+- **Phase Six: Exfiltration**
+    - Create a fake password file named `passwords.txt` on the Windows Server and download it through the established C2 session.
 
 ### **Final Notes on the Attack Diagram**
 
-- The presenter emphasizes that this diagram serves as a conceptual map for understanding the attack pathway and steps involved in successfully compromising a target machine.
-- Encourages viewers to create their own attack diagrams, especially focusing on SSH servers for additional practice.
+- This diagram serves as a conceptual map for understanding the attack pathway and steps involved in successfully compromising a target machine.
+  ![Attack Diagrampng](https://github.com/user-attachments/assets/c5106a08-13ee-4afc-88cf-492f492fe0a6)
 
 ---
 
@@ -705,16 +710,17 @@ The attack is broken down into six distinct phases:
 ### Setting Up Mythic C2
 
 - **Cloud Provider Setup**
-    - The presenter chooses Vulture as the cloud provider.
+    - I continued using Vultr as the cloud provider.
     - Steps include logging in, clicking "Deploy," and selecting options such as:
         - Cloud Compute with shared CPU.
         - Operating system: Ubuntu with 4 GB RAM.
         - No need for auto backups or IPv6.
           
 - **Installing Kali Linux**
-    - Download Kali Linux from the official website.
-    - Select the virtual machine option suitable for the hypervisor being used (e.g., VMware).
-    - Extract the downloaded file and ensure that file name extensions are visible to find the `.vmx` file.
+    - Download Kali Linux from the official website to your personal computer.
+    - Select the virtual machine option suitable for the hypervisor being used (e.g., VirtualBox).
+    - Extract the downloaded file and ensure that file name extensions are visible to find the file.
+      ![VirtualBox_vCGCfWPOWv](https://github.com/user-attachments/assets/bf174210-dfd5-4e9e-90cc-5f5987baaeb4)
       
 - **Deploying Mythic C2**
     - Access the Vulture console and log into the server using SSH.
@@ -727,7 +733,7 @@ The attack is broken down into six distinct phases:
         ```
         
     - Install required prerequisites, including Docker Compose.
-      
+    
 - **Cloning and Installing Mythic**
     - Clone the Mythic repository from GitHub:
         
@@ -744,22 +750,24 @@ The attack is broken down into six distinct phases:
         
 - **Configuring Docker**
     - If Docker is not running, restart it:
-        
         ```bash
         systemctl restart docker
         ```
+      ![WindowsTerminal_aA69ad96wR](https://github.com/user-attachments/assets/f8f2bd69-abf0-429b-9279-c4190ff6e595)
+
         
     - Start the Mythic CLI:
-        
         ```bash
         ./mythic_cli start
         ```
-        
+      ![WindowsTerminal_qOKtxaQ6Kp](https://github.com/user-attachments/assets/3775cdbe-bab2-40cf-ac04-90a11eb43b30)
 
+        
 ### Security Configurations
 
-- Set up firewall rules to restrict communication to only necessary targets.
+- Set up firewall rules through the cloud provider to restrict communication to only necessary targets.
 - Create a firewall group in Mythic for added security.
+  ![brave_YvoL2YIYT6](https://github.com/user-attachments/assets/10d38459-68ea-4771-9c9d-0a224d8b501b)
 
 ### Accessing Mythic Web GUI
 
@@ -787,49 +795,71 @@ The attack is broken down into six distinct phases:
 
 - Log into the Kali Linux machine and prepare for the Brute Force attack using tools like `crowbar`.
 - Use an existing wordlist (`rockyou.txt`) to attempt to crack the administrator's password on the Windows server.
+  ![VirtualBoxVM_IuueO4BQrQ](https://github.com/user-attachments/assets/38cc7c5b-fb9c-4d9e-8074-7c767edc0b66)
 
 ### Executing Commands on the Windows Server
 
-- Once logged in via RDP (Remote Desktop Protocol), execute discovery commands:
+- Once logged in via RDP (Remote Desktop Protocol) using xfreerdp and execute discovery commands:
     - `ipconfig`
     - `net user`
     - `net localgroup`
 - Disable Windows Defender as part of the defense evasion phase.
+  ![VirtualBoxVM_6MMWKBmw4O](https://github.com/user-attachments/assets/9a6f8398-23bd-43e7-815d-4b2766e83b0e)
 
 ### Building and Deploying Mythic Agent
 
 - Access Mythic’s web GUI to install the necessary agents (e.g., Apollo).
-- Generate a payload for the Windows machine, specifying the callback host and port.
+  ![brave_y0VpUUF8yH](https://github.com/user-attachments/assets/298a151f-cf4b-4422-acbe-6512dc502b47)
+  ![WindowsTerminal_aLq2edLQeh](https://github.com/user-attachments/assets/bde7908f-8e1c-40ef-9848-fb217c8d7dd1)
+  ![brave_DjtOaDzNy6](https://github.com/user-attachments/assets/0ef41632-d3da-439b-8c15-14ad8a747ae7)
+  ![WindowsTerminal_Qnet5yALkn](https://github.com/user-attachments/assets/8dc52151-e275-4aa5-af93-33d2a240c8b9)
+
+- Generate a payload for the Windows machine through Mythic web GUI, specifying the callback host and port.
+  ![brave_o8ImnauBdx](https://github.com/user-attachments/assets/e5bcd21d-fae4-410f-a498-23ed425be0ae)
+
 - Download the agent and rename it appropriately for execution on the target.
+  ![WindowsTerminal_MQj6OZtylK](https://github.com/user-attachments/assets/0421d45e-dc3e-4661-81d4-e5efaa6cba95)
+
 
 ### Establishing Connection and Exfiltration
 
 - Use Python's HTTP server module to serve the agent file.
 - Allow necessary ports in the firewall settings to facilitate communication between the agent and Mythic C2.
+  ![WindowsTerminal_FptqwDGIIP](https://github.com/user-attachments/assets/77102f40-6fcf-4839-b166-0a0d303b8d0c)
+
 - Execute the agent to establish a connection with Mythic C2, confirming successful execution through task manager.
+    ![VirtualBoxVM_rPhU1wec8H](https://github.com/user-attachments/assets/534a81c5-4890-429e-95d7-64642ad37f95)
 
 ### 6. Downloading Password File
 
 - Utilize the established C2 session to issue commands that download the previously created `passwords.txt` file from the Windows server.
+  ![brave_JIMhBjIuIt](https://github.com/user-attachments/assets/9234a5c5-f7af-4da7-96e3-22efa44c56e6)
+
 - Verify that the password retrieved matches what was set earlier.
+  ![brave_vuMtX9mhdk](https://github.com/user-attachments/assets/95757512-cfcb-4823-acd1-9209348f5137)
 
 ---
 
 ## 16. Creating Alerts and Dashboards for Mythic C2 Activity in Kibana
 
-1. **Accessing Elastic Web GUI**:
+- **Accessing Elastic Web GUI**:
     - Navigate to the "Discover" section by clicking the hamburger icon.
-    - Set the time frame to 30 days to capture all relevant events.
-2. **Identifying Events**:
-    - The focus is on identifying events related to `servicehost.exe` and `mythic C2` activity.
-    - Use event code 11 to look for file creation events and expand to investigate.
-3. **Using Open Source Intelligence**:
-    - The video demonstrates how to gather additional context using hash values from identified processes.
-    - Specific attention is given to the original file name, which indicates potential malicious activity.
-4. **Creating Detection Rules**:
-    - A basic alert is created to detect any process creation involving `apollo.exe`.
+    - Set the time frame to capture all relevant events.
+- **Identifying Events**:
+    - The focus is on identifying events related to `scvhost.exe` and `mythic C2` activity.
+      ![brave_aHdGV1WAEj](https://github.com/user-attachments/assets/136315e7-0c9b-4201-8d2a-6c15be666f48)
+
+    - Use event code 1 to look for file creation events and expand to investigate.
+      ![brave_DHTrl9y6jr](https://github.com/user-attachments/assets/9a7da2df-962e-47fb-b5f2-7d11e6e019ff)
+
+- **Using Open Source Intelligence**:
+    - Specific attention is given to the original file name `Apollo.exe`, which indicates potential malicious activity.
+- **Creating Detection Rules**:
+    - A basic alert is created to detect any process creation involving `Apollo.exe`.
     - The alert is set to trigger when the process is created, regardless of its success.
-5. **Setting Required Fields**:
+      ![brave_SwfiEYoT2d](https://github.com/user-attachments/assets/cce666a4-b95d-4da7-a089-20f1ffbfb45e)
+
+- **Setting Required Fields**:
     - Essential fields such as timestamp, username, command line, and parent command line are included for detailed analysis.
 
 ### Dashboard Creation
@@ -838,12 +868,12 @@ The attack is broken down into six distinct phases:
     - A dashboard is created to show suspicious activity, including external network connections and process creation events.
     - Queries are constructed for event IDs related to these activities.
 2. **Visualization Setup**:
-    - The video guides viewers through creating visualizations for both process creation (event ID 1) and network connections (event ID 3).
+    - Create visualizations for both process creation (event ID 1) and network connections (event ID 3).
     - Multiple panels are added to provide a comprehensive view of ongoing activities.
 3. **Finalizing Dashboards**:
-    - The dashboard is titled "DFIR Dashboard: Suspicious Activity" and includes multiple alerts and visualizations.
+    - The dashboard is titled and includes multiple alerts and visualizations.
     - Emphasis is placed on monitoring specific indicators of compromise, including disabled security tools like Microsoft Defender.
-
+      ![brave_CsE54UYHsy](https://github.com/user-attachments/assets/f157d67f-11c4-472c-8958-591f32b3e8b8)
 
 ---
 
@@ -851,17 +881,17 @@ The attack is broken down into six distinct phases:
 
 ### Step 1: Deploying a Server
 
-- **Platform**: The presenter uses Vulture to deploy a new server.
+- **Platform**: I use Vultr to deploy a new Windows server.
 - **Configuration**:
     - **Server Type**: Cloud compute with shared CPU.
-    - **Location**: Toronto.
+    - **Location**: Osaka (same as before).
     - **Operating System**: Windows Standard 2022.
     - **Specifications**: 55 GB storage, 1 CPU, and 2 GB memory.
 - **Firewall Setup**: A firewall is configured to restrict access to the web server that will host OS Ticket.
 
 ### Step 2: Installing XAMPP
 
-- **Download XAMPP**: The presenter downloads XAMPP (version 8.2.2) from the Apache Friends website.
+- **Download XAMPP**: Download XAMPP (version 8.2.2) from the Apache Friends website.
 - **Installation**:
     - Default installation settings are used, and properties are edited to configure Apache and MySQL settings.
 - **Firewall Rules**: Inbound rules are created to allow connections on ports 80 and 443.
@@ -870,13 +900,14 @@ The attack is broken down into six distinct phases:
 
 - **Accessing PHPMyAdmin**: Initial connection errors are resolved by adjusting configuration files to allow access through the public IP address.
 - **User Accounts**: User credentials for root and PMA accounts are set up.
+  ![mstsc_6GnrIpSZYQ](https://github.com/user-attachments/assets/5de54368-d761-4bde-b5f9-8e59a91dbb4b)
 
 ### **Installing OS Ticket**
 
 ### Step 4: Downloading OS Ticket
 
-- **Download Version**: The presenter downloads OS Ticket (version 1.18.1) from the official site.
-- **File Extraction**: Extracts the files to the `HTdocs` directory in XAMPP.
+- **Download Version**: Download OS Ticket (version 1.18.1) from the official site.
+- **File Extraction**: Extracts the files to the `htdocs` directory in XAMPP.
 
 ### Step 5: Running the Installer
 
@@ -887,8 +918,7 @@ The attack is broken down into six distinct phases:
 ### Step 6: Finalizing Installation
 
 - After addressing some errors regarding email settings, the installation is successfully completed.
-- **File Permissions**: The presenter discusses how to change file permissions using Windows PowerShell.
-
+  ![mstsc_p04vjGHjct](https://github.com/user-attachments/assets/18cb48ce-8bc2-407d-aee7-1d536b32a559)
 
 ---
 
