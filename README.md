@@ -60,13 +60,13 @@ This project showcases my ability to set up, configure, and maintain essential S
 - **Adding Internet Gateway**:
     - Include an internet gateway and connect it to the VPC and external internet.
 - **SOC Analyst Laptop**:
-    - Introduce a "SOC Analyst Laptop" and an "Attacker Laptop" representing different roles in the environment.
+    - Introduce a "SOC Analyst Laptop" and an "Attacker Laptop" that represent different roles in the environment.
     - Connect these laptops to the internet and relevant servers.
 
 ### Finalizing the Diagram
 
 - Save your work in Draw.io to keep a record of the diagram.
-  ![Test Environment](https://github.com/user-attachments/assets/df783eda-f2e8-42bf-94c8-c0706d77045e)
+  ![Test Environment update2 drawio](https://github.com/user-attachments/assets/9f4bed59-7e69-4ccc-ad5e-d72cda9de7ed)
 
 ---
 
@@ -395,7 +395,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ### Field Mapping
 
-- The project discusses the field mappings provided in this package, which includes details like `winlog.computer_name`.
+- Look for the field mappings provided in this package, which includes details like `winlog.computer_name`.
 
 - Configuring Sysmon Logs
     - Open Event Viewer on your Windows Server and navigate to `Applications and Services Logs > Microsoft > Windows > Sysmon`.
@@ -436,7 +436,7 @@ This project showcases my ability to set up, configure, and maintain essential S
 
 ---
 
-## 8. Setting Up the Ubuntu Server
+## 8. Setting Up the Ubuntu Server & Reviewing Logs
 
 - **Vultr Setup**:
     - Visit [Vultr.com](https://vultr.com/) and sign in.
@@ -496,7 +496,7 @@ This project showcases my ability to set up, configure, and maintain essential S
         
 ---
 
-## 9. Install Elastic Agent on the Server (Ubuntu)
+## 9. Install Elastic Agent on the Server
 
 ### Accessing the Elastic Web GUI
 
@@ -772,7 +772,7 @@ The attack is broken down into six distinct phases:
 ### Accessing Mythic Web GUI
 
 - Access the Mythic web interface using the public IP address on port 7443;
-      - If an HTTP error appears, add HTTPS.
+    - If an HTTP error appears, add HTTPS.
 - Default login credentials can be found in the environment variable file.
 
 ### Overview of Mythic Features
@@ -830,7 +830,7 @@ The attack is broken down into six distinct phases:
 - Execute the agent to establish a connection with Mythic C2, confirming successful execution through task manager.
     ![VirtualBoxVM_rPhU1wec8H](https://github.com/user-attachments/assets/534a81c5-4890-429e-95d7-64642ad37f95)
 
-### 6. Downloading Password File
+### Downloading Password File
 
 - Utilize the established C2 session to issue commands that download the previously created `passwords.txt` file from the Windows server.
   ![brave_JIMhBjIuIt](https://github.com/user-attachments/assets/9234a5c5-f7af-4da7-96e3-22efa44c56e6)
@@ -929,6 +929,7 @@ The attack is broken down into six distinct phases:
 - Log into the OS Ticket control panel.
 - Navigate to the Admin panel and select `Manage`, then `API`.
 - Click `Add New API Key`, entering the private IP address of the OS Ticket server if it's in the same Virtual Private Cloud (VPC), or the public IP if not.
+  ![brave_BFYW9HzygC](https://github.com/user-attachments/assets/79f65ca0-0da6-40df-bdf3-15ce6daa77f1)
 
 ### Setting Up Elastic Stack
 
@@ -936,12 +937,18 @@ The attack is broken down into six distinct phases:
 - Select `Stack Management`, then `Alerts and Insights`.
 - Click on `Connectors` and choose to create a new connector.
 - Start a free 30-day trial to enable API connections if you're using a free license.
+  ![brave_TKgexj3P3s](https://github.com/user-attachments/assets/4bdca4dc-dcae-4100-817f-48819a003b18)
 
 ### Creating the Connector
 
 - Use a webhook connector to send alerts from Elastic to OS Ticket.
 - Set up the webhook with the OS Ticket's IP address and API key.
+  ![brave_xh4t34tYDY](https://github.com/user-attachments/assets/579aaabb-0160-4f5c-b735-dbee10daaa72)
+
 - Configure the body for the webhook request using an XML payload example from OS Ticket’s GitHub page.
+  ![brave_q97N7g9waL](https://github.com/user-attachments/assets/3a971277-876b-40c2-bafa-5f0992d60e0d)
+
+  ![brave_iVZzJBERuy](https://github.com/user-attachments/assets/72770257-1066-44f6-823c-c99c26b432a4)
 
 ### Troubleshooting Connection Issues
 
@@ -953,6 +960,7 @@ The attack is broken down into six distinct phases:
 
 - Adjust the network settings on your OS Ticket server if necessary to ensure it has a private IP.
 - Rerun the test for the connector after making any adjustments.
+  ![brave_IcOWFX5oDx](https://github.com/user-attachments/assets/c111816c-a044-4caf-82ac-993c2cbcaf14)
 
 ---
 
@@ -961,34 +969,42 @@ The attack is broken down into six distinct phases:
 ### Steps to Investigate Brute Force Alerts
 
 - **Identifying the Source IP**:
-    - The first step is to note the source IP address from the alert, which is reported as `194.50.201.6`.
-    - The host checks this IP against known databases to determine its reputation for brute force activity.
+    - The first step is to note the source IP address from the alert, which was reported as `218.92.0.133`.
+      ![brave_CcFfVyzi4N](https://github.com/user-attachments/assets/fa00110a-aa2d-43bc-9d2c-ad14ec25b597)
+
+    - Check this IP against known databases to determine its reputation for brute force activity.
       
 - **Using External Resources**:
-    - **AbuseIPDB**: The IP is found to be reported 1,816 times with a confidence level of 100% indicating malicious behavior.
-    - **GreyNoise**: A search reveals that the IP is known to use tools such as zmap for SSH brute-forcing.
-      
+    - **AbuseIPDB**: The IP is found to be reported indicating malicious behavior.
+    - **GreyNoise**: A search reveals that the IP is known to use SSH brute-forcing.
+      ![brave_HfeyjvUU7b](https://github.com/user-attachments/assets/8cf54698-ee38-4dad-a05f-17b413b26aff)
+
 - **Identifying Affected Users**:
-    - The host uses Kibana to query events related to the identified IP over the last 30 days.
-    - Four distinct users are affected: root, Oracle, guest, and test accounts.
+    - Use Kibana to query events related to the identified IP over the last 30 days.
+    - One distinct user is affected: root.
+      ![brave_Jfs87ubIFM](https://github.com/user-attachments/assets/288bc9b8-7872-4510-a79b-4526c8ea021e)      
       
 - **Looking for Successful Logins**:
     - Initial queries for successful logins return no results, suggesting that all login attempts were unsuccessful.
-    - The host emphasizes the importance of double-checking queries and adjusting capitalization since it can affect search results.
+    - Double-check queries and adjust capitalization since it can affect search results.
 
 ### Documenting Findings
 
-- The host discusses how to document findings in a ticketing system, emphasizing the need to add notes and ensure proper processes are followed.
+- Document findings in a ticketing system, adding notes to ensure proper processes are followed.
+  ![brave_tY7VdtF99e](https://github.com/user-attachments/assets/8552eacd-b418-4eff-b77a-57da02edc5f1)
+
 - Modifications are made to alert rules to push notifications into a ticketing system (OS Ticket).
+  ![brave_4ldqM7Brsq](https://github.com/user-attachments/assets/fe24f114-1001-4bb7-911b-cec000440533)
+
 
 ### Configuring Alerts
 
-- The video covers editing alert settings, including configuring webhook actions and ensuring that alerts contain relevant information such as the source IP and user details.
-- The importance of having hyperlinks in notifications for easy access to alert details is noted.
+- Edit alert settings, including configuring webhook actions and ensuring that alerts contain relevant information such as the source IP and user details.
+- It's important to have hyperlinks in notifications for easy access to alert details.
 
 ### Closing Tickets
 
-- Finally, the process of assigning and closing tickets is demonstrated, highlighting the importance of communication among team members to avoid duplicated efforts.
+- Finally, it's important to communicate among team members to avoid duplicated efforts.
 
 ---
 
@@ -997,34 +1013,35 @@ The attack is broken down into six distinct phases:
 ### Investigating RDP Brute Force Attacks
 
 - **Accessing Alerts:**
-    - The presenter demonstrates how to navigate to the alert section of their security tool.
-    - They filter alerts to focus specifically on RDP Brute Force alerts from the past 30 days.
+    - Navigate to the alert section of Elastic.
+    - Filter alerts to focus specifically on RDP Brute Force alerts from the past 30 days.
+      
 - **Details of the Alert:**
-    - An example alert is examined, revealing the source IP address (81.1.163.20) and the use of the username "administrator."
-    - The presenter mentions creating a ticket in OS Ticket for the alert.
-- **Using AbuseIPDB:**
-    - The presenter checks the flagged IP address on AbuseIPDB, which shows it has been reported multiple times for suspicious activity.
-    - The IP is associated with RDP Brute Force attempts and categorized as originating from Russia.
-- **Gray Noise Analysis:**
-    - They also analyze the IP using Gray Noise, which identifies scanning activity but cannot determine intent.
-    - The analysis reveals that this IP is classified as a "RDP crawler," indicating potential malicious activity.
+    - An example alert is examined, revealing the source IP address (189.180.183.69) and the use of the username "Administrator".
+      ![brave_d6MO26IqWX](https://github.com/user-attachments/assets/8a55a78f-8718-4e1c-9563-edb1da22c49d)
 
-## Addressing Key Questions
+    - Create a ticket in OS Ticket for the alert.
+      
+- **Using AbuseIPDB:**
+    - Check the flagged IP address on AbuseIPDB, which shows it has been reported for suspicious activity.
+      ![brave_3BAJW4kRZg](https://github.com/user-attachments/assets/a1aab87d-5053-4f5f-9602-4a7168058846)
+      
+- **Gray Noise Analysis:**
+    - Analyze the IP using Gray Noise, which identifies scanning activity but cannot determine intent.
+      ![brave_J9PxLqscNe](https://github.com/user-attachments/assets/731b5dad-db11-407e-871f-2d65166d2774)
+
+### Addressing Key Questions
 
 - **Is the IP Known for Brute Force Activity?**
     - Yes, confirmed through AbuseIPDB reports.
 - **Are There Other Users Affected by This IP?**
-    - The analysis shows that only the "administrator" account is affected, with no successful logins recorded.
+    - The analysis shows that only the "Administrator" and account is affected, with no successful logins recorded.
 - **Successful Login Attempts:**
-    - The presenter looks for event code 4624, indicating successful authentications, and finds no successful logins from the flagged IP address.
+    - Look for event code 4624, indicating successful authentications, and found no successful logins from the flagged IP address.
+      ![brave_AEX9M8jVVc](https://github.com/user-attachments/assets/e79e8f73-4871-4fde-8e38-df3958a80232)
+
 - **Investigating Another IP:**
-    - They investigate another IP involved in a previous RDP Brute Force attempt and find similar results regarding its malicious activity.
-
-## Conclusion and Next Steps
-
-- The presenter emphasizes the importance of thorough investigation, including checking for successful logins and understanding potential compromises.
-- They encourage viewers to explore processes like persistence mechanisms and lateral movements in their investigations.
-- Future videos will continue to build on these investigative techniques, including discussions around Mythic C2 agent activities.
+    - (see what you find)
 
 ---
 
@@ -1032,33 +1049,35 @@ The attack is broken down into six distinct phases:
 
 ### Getting Started with Mythic C2
 
-- **Initial Investigation**: The host mentions that the Mythic C2 agent is called `servicehost DStepenrocks.exe` (the name may vary based on user).
-- **Finding Events**: Analysts should use the Discover feature by setting the time frame to 30 days and searching for `servicehost DStepenrocks.exe` to gather relevant events.
+- **Initial Investigation**: My Mythic C2 agent was called `svchost-ideafieldpro.exe` (the name may vary based on what you configure).
+- **Finding Events**: Analysts should use the Discover feature by setting the time frame to 30 days and searching for `svchost-ideafieldpro.exe` to gather relevant events.
 
-### Identifying C2 Activity
+### Tips on Identifying C2 Activity
 
-- **Network Telemetry**: The host explains that C2 sessions often involve significant back-and-forth traffic, indicating potential data transfer.
+- **Network Telemetry**: C2 sessions often involve significant back-and-forth traffic, indicating potential data transfer.
 - **Top Talkers**: Monitoring the top 10 address pairs for high traffic can help identify C2 communications.
-- **Heartbeat Monitoring**: A tool called Rita from Black Hills Security is recommended for detecting potential C2 traffic.
+- **Heartbeat Monitoring**: A tool called [Rita](https://www.blackhillsinfosec.com/projects/rita/) from Black Hills Security is recommended for detecting potential C2 traffic.
 
 ### Process Creation Analysis
 
-- **Sysmon Event ID 3**: The host looks at network connections initiated by certain processes, particularly focusing on `rundll32.exe`, which is commonly exploited by malware.
+- **Sysmon Event ID 3**: Look at inbound network connections to the host initiated by certain processes, particularly focusing on `rundll32.exe`, which is commonly exploited by malware.
+  ![brave_19XAkZY2dh](https://github.com/user-attachments/assets/33190175-1ad2-40f0-b795-1e87e84ce875)
+
 - **Suspicious Activity**: Identifying unusual process executions, like those from `Microsoft Edge` or executables in unexpected directories, is crucial.
 
 ### Building a Timeline
 
-- **Event Correlation**: The host demonstrates how to build a timeline of events related to suspicious network connections and process creations.
+- **Event Correlation**: Build a timeline of events related to suspicious network connections and process creations.
+  ![Notepad_Oevcoeiu3f](https://github.com/user-attachments/assets/cfdd0874-effc-4e25-9e36-e70781b1d82c)
+
 - **Using Process GUIDs**: By following the process GUID, analysts can trace back the actions of PowerShell sessions and other potentially malicious activities.
+  ![brave_KHrq04pehB](https://github.com/user-attachments/assets/719920f4-9765-4771-b8ae-a3ca311a7ee0)
+  
 
 ### Detection Rules Configuration
 
-- **Mythic C2 Apollo Rules**: The host shows how to edit detection rules in Mythic to ensure alerts are generated for any suspicious activities.
-
-### Real-time Investigation
-
-- **Testing Alerts**: The host interacts with the Mythic server and demonstrates how to generate alerts by executing commands.
-- **Monitoring Telemetry**: Both endpoint telemetry and network-related data are emphasized for a comprehensive investigation.
+- **Mythic C2 Apollo Rules**: Edit detection rules for the Mythic payload to ensure alerts are generated for any suspicious activities.
+  ![brave_JNdcGatapa](https://github.com/user-attachments/assets/5c7e79d7-56b5-43b7-8440-dede7593caf3)
 
 ---
 
@@ -1067,11 +1086,15 @@ The attack is broken down into six distinct phases:
 ### Key Steps in the Installation Process
 
 - **Downloading and Installing Elastic Defend**:
-    - The presenter guides viewers to download and install Elastic Defend on their endpoints to start protecting against malicious activity.
+    - Download and install Elastic Defend on the endpoint to start protecting against malicious activity.
     - Note: Free subscriptions do not allow for remote host isolation.
+      ![brave_4fhDyKAAzi](https://github.com/user-attachments/assets/859ba1e5-e6e2-4dbd-bf4a-89a20befe1b5)
+
+      
 - **Integration Setup**:
     - Once installed, users should navigate to the top-left corner (the hamburger icon) and scroll to "Integrations."
     - Click on Elastic Defend to add the integration, providing a name and description for the setup.
+      
 - **Configuration Options**:
     - There are four configuration types:
         - Data Collection
@@ -1079,24 +1102,37 @@ The attack is broken down into six distinct phases:
         - Essential EDR
         - Complete EDR
     - The presenter selects the "Complete EDR" option for full telemetry and protection.
-    - Configurations can be set for traditional endpoints or cloud workloads.
+    - Configurations can be set for traditional endpoints or cloud workloads. I used traditional endpoints.
+      ![brave_QUIX7ITUt5](https://github.com/user-attachments/assets/80127cc5-d687-4884-8ec1-74def98c22a4)
+
+      
 - **Endpoint Management**:
     - The Windows Server is selected for integration, and changes are saved for deployment.
-    - Once deployed, users can view endpoints under the "Security" section.
+    - Once deployed, we can view endpoints under the "Security" section.
+      ![brave_Te3auHI4rc](https://github.com/user-attachments/assets/76390332-0e0a-42a0-b879-f191b3bfa284)
 
 ### Demonstrating EDR Capabilities
 
-- The presenter executes a test by terminating a potentially harmful process (`defer D30.exe`) to showcase Elastic Defend's alert mechanisms.
+- Execute a test by terminating a potentially harmful process (`ideafieldpro-analyst.exe`) to showcase Elastic Defend's alert mechanisms.
+  ![brave_9OZBhnq762](https://github.com/user-attachments/assets/c04142c4-cb63-4498-97a3-2fbc3adfd55f)
+
 - An alert is generated indicating that the file contains a virus, demonstrating effective malware prevention.
+  ![mstsc_iJChfIeYo9](https://github.com/user-attachments/assets/ab50bcf9-4c27-463b-8ab3-0bd4ad3eefd3)
 
 ## Investigating Alerts
 
-- Viewers are shown how to access telemetry data via Kibana:
+- Access telemetry data via Kibana:
     - Search for malware alerts in the "Discover" tab.
-    - The video outlines how to sort alerts by timestamp and examine details of any detected threats, including file paths and hash values.
+      ![brave_WhjaqVXmdB](https://github.com/user-attachments/assets/47cef086-fdd0-4c55-8df9-41c3e689c8d0)
 
 ## Incident Response Actions
 
-- The presenter discusses editing rule settings in Elastic Defend:
+- Edit rule settings in Elastic Defend:
     - Users can set responses to isolate the host if malicious activity is detected.
+      ![brave_WdupH0CjY4](https://github.com/user-attachments/assets/15fdd968-98e0-4f1c-95e7-5b72c4f3c3f1)
+
     - A command prompt demonstration shows an infinite ping command, illustrating that network activity is limited when a host is isolated.
+      ![mstsc_XMFneoa5DB](https://github.com/user-attachments/assets/8ed74483-3bb4-4451-af07-65547ad38c6c)
+      
+      ![brave_qdeqi0wq64](https://github.com/user-attachments/assets/a3d2ce79-e435-4c69-a703-831b888d5803)
+
